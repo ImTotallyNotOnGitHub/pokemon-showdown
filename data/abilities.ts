@@ -2235,6 +2235,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 98,
 	},
+	magicalmight: {
+		onModifySpAPriority: 5,
+		onModifySpA(spa) {
+			return this.chainModify(2);
+		},
+		name: "Magical Might",
+		rating: 5,
+		num: 299,
+	},
 	magician: {
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (!move || !target || source.switchFlag === true) return;

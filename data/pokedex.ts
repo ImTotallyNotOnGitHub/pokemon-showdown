@@ -3689,7 +3689,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Natu",
 		types: ["Psychic", "Flying"],
 		baseStats: {hp: 40, atk: 50, def: 45, spa: 70, spd: 45, spe: 70},
-		abilities: {0: "Synchronize", 1: "Early Bird", H: "Magic Bounce"},
+		abilities: {0: "Synchronize", 1: "Magical Might", H: "Magic Bounce"},
 		heightm: 0.2,
 		weightkg: 2,
 		color: "Green",

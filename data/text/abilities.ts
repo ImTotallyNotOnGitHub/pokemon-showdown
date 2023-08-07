@@ -902,6 +902,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 			shortDesc: "This Pokemon can only be damaged by direct attacks, and can't be fully paralyzed.",
 		},
 	},
+	magicalmight: {
+		name: "Magical Might",
+		shortDesc: "This Pokemon's Special Attack is doubled.",
+	},
 	magician: {
 		name: "Magician",
 		desc: "If this Pokemon has no item, it steals the item off a Pokemon it hits with an attack. Does not affect Doom Desire and Future Sight.",
