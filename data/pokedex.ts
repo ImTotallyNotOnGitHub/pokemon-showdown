@@ -16044,6 +16044,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		eggGroups: ["Mineral", "Dragon"],
 		canGigantamax: "G-Max Depletion",
+		evos: ["Archaludon"],
 	},
 	duraludongmax: {
 		num: 884,
