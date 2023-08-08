@@ -5271,7 +5271,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	duraludon: {
 		isNonstandard: "Past",
 		tier: "Illegal",
-		natDexTier: "RU",
+		natDexTier: "NFE",
 	},
 	duraludongmax: {
 		isNonstandard: "Past",
