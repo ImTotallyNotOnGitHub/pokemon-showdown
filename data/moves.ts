@@ -16762,13 +16762,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (this.checkMoveMakesContact(move, source, target)) {
-					this.boost({spe: -1}, source, target, this.dex.getActiveMove("Silk Trap"));
+					this.add('-sidestart', 'move: Sticky Web');
 				}
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
 				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
-					this.boost({spe: -1}, source, target, this.dex.getActiveMove("Silk Trap"));
+					this.add('-sidestart', 'move: Sticky Web');
 				}
 			},
 		},
