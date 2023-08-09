@@ -1454,6 +1454,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 
 		damage: "  [POKEMON] was hurt!",
 	},
+	rubblerouser: {
+		name: "Rubble Rouser",
+		shortDesc: "If this Pokemon is hit by a physical attack, Stealth Rock is set on the opposing side.",
+	},
 	runaway: {
 		name: "Run Away",
 		shortDesc: "No competitive use.",

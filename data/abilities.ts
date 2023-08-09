@@ -3596,6 +3596,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 24,
 	},
+	rubblerouser: {
+		onDamagingHit(damage, target, source, move) {
+			const side = source.isAlly(target) ? source.side.foe : source.side;
+			const stealthRock = side.sideConditions['stealthrock'];
+			if (move.category === 'Physical' && (!stealthRock || stealthRock.layers < 2)) {
+				this.add('-activate', target, 'ability: Rubble Rouser');
+				side.addSideCondition('stealthrock', target);
+			}
+		},
+		name: "Toxic Debris",
+		rating: 3.5,
+		num: 300,
+	},
 	runaway: {
 		name: "Run Away",
 		rating: 0,
