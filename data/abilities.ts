@@ -3600,7 +3600,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			const side = source.isAlly(target) ? source.side.foe : source.side;
 			const stealthRock = side.sideConditions['stealthrock'];
-			if (move.category === 'Physical' && (!stealthRock || stealthRock.layers < 2)) {
+			if (move.category === 'Physical') {
 				this.add('-activate', target, 'ability: Rubble Rouser');
 				side.addSideCondition('stealthrock', target);
 			}
