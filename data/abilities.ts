@@ -3605,7 +3605,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				side.addSideCondition('stealthrock', target);
 			}
 		},
-		name: "Toxic Debris",
+		name: "Rubble Rouser",
 		rating: 3.5,
 		num: 300,
 	},
