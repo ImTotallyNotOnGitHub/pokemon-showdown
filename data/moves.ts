@@ -16763,7 +16763,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				if (this.checkMoveMakesContact(move, source, target)) {
 					for (const side of source.side.foeSidesWithConditions()){
-						side.addSideCondition('stickyweb');
+						side.addSideCondition('stickyweb', target);
 					}
 				}
 				return this.NOT_FAIL;
@@ -16771,11 +16771,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onHit(target, source, move) {
 				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
 					for (const side of source.side.foeSidesWithConditions()){
-						side.addSideCondition('stickyweb');
+						side.addSideCondition('stickyweb', target);
 					}
 				}
 			},
 		},
+		secondary: null,
 		target: "self",
 		type: "Bug",
 	},

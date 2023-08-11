@@ -16730,7 +16730,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: 918,
 		name: "Spidops",
 		types: ["Bug"],
-		baseStats: {hp: 60, atk: 79, def: 92, spa: 52, spd: 86, spe: 35},
+		baseStats: {hp: 68, atk: 90, def: 105, spa: 59, spd: 98, spe: 40},
 		abilities: {0: "Insomnia", H: "Stakeout"},
 		heightm: 1,
 		weightkg: 16.5,
