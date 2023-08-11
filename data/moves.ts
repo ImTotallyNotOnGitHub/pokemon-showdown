@@ -16739,14 +16739,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			pokemon.addVolatile('stall');
 		},
 		condition: {
-			onSideStart(side){
-				this.add('-sidestart', side,'move: Sticky Web');
-			},
-			onEntryHazard(pokemon){
-				if (pokemon.hasItem('heavydutyboots'))return;
-				this.add('-activate', pokemon, 'Sticky Web');
-					this.boost({spe: -1}, pokemon, this.effectState.source, this.dex.getActiveMove('stickyweb'));
-			},
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Protect');
