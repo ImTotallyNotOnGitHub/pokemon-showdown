@@ -16761,7 +16761,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 						delete source.volatiles['lockedmove'];
 					}
 				}
-				if (this.checkMoveMakesContact(move, source, target)) {
+				if (!this.checkMoveMakesContact(move, source, target)) {
 					for (const side of source.side.foeSidesWithConditions()){
 						side.addSideCondition('stickyweb', target);
 					}
@@ -16769,7 +16769,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
+				if (!move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
 					for (const side of source.side.foeSidesWithConditions()){
 						side.addSideCondition('stickyweb', target);
 					}
