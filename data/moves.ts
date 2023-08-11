@@ -16761,17 +16761,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 						delete source.volatiles['lockedmove'];
 					}
 				}
-				if (!this.checkMoveMakesContact(move, source, target)) {
-					for (const side of source.side.foeSidesWithConditions()){
-						side.addSideCondition('stickyweb', target);
+				if (this.checkMoveMakesContact(move, source, target)) {
+					for (const side of target.side.foeSidesWithConditions()){
+						side.addSideCondition('stickyweb');
 					}
 				}
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-				if (!move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
-					for (const side of source.side.foeSidesWithConditions()){
-						side.addSideCondition('stickyweb', target);
+				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
+					for (const side of target.side.foeSidesWithConditions()){
+						side.addSideCondition('stickyweb');
 					}
 				}
 			},
@@ -18489,14 +18489,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, slicing: 1},
 		onAfterHit(target, source, move) {
-			if (!move.hasSheerForce && source.hp) {
+			if (move.hasSheerForce && source.hp) {
 				for (const side of source.side.foeSidesWithConditions()) {
 					side.addSideCondition('stealthrock');
 				}
 			}
 		},
 		onAfterSubDamage(damage, target, source, move) {
-			if (!move.hasSheerForce && source.hp) {
+			if (move.hasSheerForce && source.hp) {
 				for (const side of source.side.foeSidesWithConditions()) {
 					side.addSideCondition('stealthrock');
 				}
