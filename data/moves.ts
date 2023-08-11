@@ -16739,6 +16739,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 			pokemon.addVolatile('stall');
 		},
 		condition: {
+			onSideStart(side){
+				this.add('-sidestart', side,'move: Sticky Web');
+			},
+			onEntryHazard(pokemon){
+				if (pokemon.hasItem('heavydutyboots'))return;
+				this.add('-activate', pokemon, 'Sticky Web');
+					this.boost({spe: -1}, pokemon, this.effectState.source, this.dex.getActiveMove('stickyweb'));
+			},
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Protect');
@@ -16762,13 +16770,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (this.checkMoveMakesContact(move, source, target)) {
-					this.add('stickyweb', source, target, this.dex.getActiveMove("Silk Trap"));
+					for (const side of source.side.foeSidesWithConditions()){
+						side.addSideCondition('stickyweb');
+					}
 				}
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
 				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
-					this.add('stickyweb', source, target, this.dex.getActiveMove("Silk Trap"));
+					for (const side of source.side.foeSidesWithConditions()){
+						side.addSideCondition('stickyweb');
+					}
 				}
 			},
 		},
