@@ -16762,6 +16762,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (this.checkMoveMakesContact(move, source, target)) {
+					if (target.isActive) source.addVolatile('trapped', source, move, 'trapper');
 					for (const side of target.side.foeSidesWithConditions()){
 						side.addSideCondition('stickyweb');
 					}
@@ -16770,6 +16771,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onHit(target, source, move) {
 				if (move.isZOrMaxPowered && this.checkMoveMakesContact(move, source, target)) {
+					if (target.isActive) source.addVolatile('trapped', source, move, 'trapper');
 					for (const side of target.side.foeSidesWithConditions()){
 						side.addSideCondition('stickyweb');
 					}
