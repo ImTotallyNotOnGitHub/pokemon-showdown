@@ -6044,4 +6044,15 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 	},
+// PokeClash Dex Tiering
+	smouse: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "LC"
+	},
+	cigarat: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
 };
