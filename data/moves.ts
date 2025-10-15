@@ -22110,4 +22110,368 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Fire",
 		contestType: "Beautiful",
 	},
+// PokeClash Custom Moves
+  	darkharvest: {
+    	num: -4,
+    	accuracy: 100,
+    	basePower: 50,
+    	category: "Special",
+    	name: "Dark Harvest",
+    	pp: 10,
+    	priority: 0,
+    	flags: { contact: 1, protect: 1, mirror: 1, heal: 1, metronome: 1 },
+    	drain: [3, 4],
+    	secondary: null,
+    	target: "normal",
+    	type: "Dark",
+    	contestType: "Clever"
+  	},
+	thunderouswrath: {
+		num: -5,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Thunderous Wrath",
+		pp: 10,
+		priority: 0,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, failinstruct: 1 },
+		self: {
+			volatileStatus: 'lockedmove',
+		},
+		secondary: null,
+		target: "randomNormal",
+		type: "Electric",
+		contestType: "Tough",
+	},
+    tidalpurge: {
+    	num: -6,
+    	name: "Tidal Purge",
+    	accuracy: 100,
+    	basePower: 80,
+    	category: "Physical",
+    	isNonstandard: "Custom",
+    	pp: 10,
+    	priority: 0,
+    	flags: {protect: 1, mirror: 1},
+    	onBasePower(basePower, attacker, defender, move) {
+    		const hazards = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb'];
+      		if (hazards.some(h => attacker.side.getSideCondition(h))) {
+        		return this.chainModify(1.5);
+      		}
+		},
+    	onHit(target, source, move) {
+      		const hazards = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb'];
+      		for (const hazard of hazards) {
+        		if (source.side.getSideCondition(hazard)) {
+          			source.side.removeSideCondition(hazard);
+          			this.add('-sideend', source.side, this.dex.conditions.get(hazard).name, '[from] move: ' + move.name);
+        		}
+      		}
+    	},
+    	type: "Water",
+    	target: "normal" 
+    },
+    grandfinale: {
+    	num: -7,
+    	name: "Grand Finale",
+    	accuracy: 100,
+    	basePower: 80,
+    	category: "Special",
+    	isNonstandard: "Custom",
+    	pp: 10,
+    	priority: 0,
+    	thawsTarget: true,
+    	flags: {protect: 1, mirror: 1},    
+    	onBasePower(basePower, attacker, defender, move) {
+      		const screens = ['reflect', 'lightscreen', 'auroveil'];
+      		if (screens.some(s => defender.side.getSideCondition(s))) {
+        		return this.chainModify(1.5);
+      		}
+    	},
+    	onHit(target, source, move) { // You may want to use onAfterHit instead (up to you)
+      // List of screens
+      const screens = ['reflect', 'lightscreen', 'auroveil'];
+      
+      for (const screen of screens) { // For every screen in the list screens
+        if (target.side.getSideCondition(screen)) { // If the screen is active on the opponent side
+          target.side.removeSideCondition(screen); // Remove the screen from the opponent side
+        }
+      }
+    },
+    type: "Fire",
+    target: "normal"
+  },
+    terraform: {
+    num: -8,
+    name: "Terraform",
+    accuracy: 100,
+    basePower: 80,
+    category: "Physical",
+    isNonstandard: "Custom",
+    pp: 10,
+    priority: 0,
+    flags: {protect: 1, mirror: 1},
+    
+    // Runs before damage to check if any terrain is active
+    onBasePower(basePower, attacker, defender, move) {
+      if (this.field.terrain) {
+        return this.chainModify(1.5); // 1.5x damage if a terrain is active
+      }
+    },
+
+    // After dealing damage, clear the terrain
+    onHit(Target, source, move) {
+      if (this.field.terrain) {
+        this.field.clearTerrain(); // Remove the active terrain
+      }
+    },
+    type: "Ground",
+    target: "normal"
+  },
+    galeforce: {
+    num: -9,
+    name: "Galeforce",
+    accuracy: 100,
+    basePower: 80,
+    category: "Special",
+    isNonstandard: "Custom",
+    pp: 10,
+    priority: 0,
+    flags: {wind: 1, protect: 1, mirror: 1},
+    
+    // Runs before damage to check if any weather is active
+    onBasePower(basePower, attacker, defender, move) {
+      if (this.field.weather) {
+        return this.chainModify(1.5); // 1.5x damage if any weather is active
+      }
+    },
+    
+    // After dealing damage, clear the weather
+    onHit(target, source, move) {
+      if (this.field.weather) {
+        this.field.clearWeather(); // Remove the active weather
+      }
+    },
+    type: "Flying",
+    target: "normal"
+  },
+  synapticblade: {
+    num: -10,
+    accuracy: 100,
+    basePower: 85,
+    category: "Physical",
+    overrideDefensiveStat: "spd",
+    name: "Synaptic Blade",
+    pp: 10,
+    priority: 0,
+    flags: { contact: 1, protect: 1, mirror: 1, slicing: 1 },
+    secondary: null,
+    target: "normal",
+    type: "Psychic",
+    contestType: "Clever"
+  },
+  phantomproxy: {
+	num: -11,
+	name: "Phantom Proxy",
+	accuracy: true,
+	basePower: 0,
+	category: "Status",
+	isNonstandard: "Custom",
+	pp: 10,
+	priority: 1,
+	flags: {protect: 1, mirror: 1},
+    volatileStatus: "substitute",
+	onTryHit(target, source, move) {
+	
+	  // If user already has a substitute then fail
+	  if (source.volatiles['substitute']) {
+        this.debug(`${target.name} could not create a substitute!`)
+		// If you want this to show the same message as Substitute
+		// Then change "move: Phantom Proxy" to "move: Substitute"
+		// Otherwise, you need to add your own lang under "cobblemon.battle.fail.phantomproxy"
+	    this.add("-fail", source, "move: Phantom Proxy");
+	    return this.NOT_FAIL;
+	  }
+	  
+	  // If user's health is less than 2/5th of its Max HP then fail
+	  if (source.hp <= Math.floor(source.maxhp * 2 / 5) || source.maxhp === 1) {
+		// If you want this to show the same message as Substitute
+		// Then change "move: Phantom Proxy" to "move: Substitute"
+		// Otherwise, you need to add your own lang under "cobblemon.battle.fail.phantomproxy"
+	    this.add("-fail", source, "move: Phantom Proxy", "[weak]"); 
+	    return this.NOT_FAIL;
+	  }
+    },
+    onHit(target) {
+      this.directDamage(Math.ceil(2 * target.maxhp / 5));
+	},
+    secondary: null,
+	type: "Ghost",
+	target: "self",
+    zMove: { effect: "clearnegativeboost" },
+    contestType: "Clever"
+  },
+  silvertoll: {
+    num: 5016,
+    isNonstandard: "Custom",
+    accuracy: 100,
+    basePower: 100,
+    category: "Special",
+    name: "Silver Toll",
+    pp: 5,
+    priority: 0,
+    // Bypasses Substitute, affected by Mirror Move, blocked by Protect, is a sound-based move
+    flags: { bypasssub: 1, mirror: 1, protect: 1, sound: 1 },
+    // if an ally fainted last turn, this move's power is 150
+    onBasePower(basePower, pokemon) {
+        if (pokemon.side.faintedLastTurn) {
+            this.debug("Boosted for a faint last turn");
+            return this.chainModify(1.5);
+      }
+    },
+    // if this move is used and an ally fainted last turn, the move cannot be used for a turn
+    onAfterMove(pokemon, target, move) {
+        if (move.id === 'silvertoll' && pokemon.side.faintedLastTurn) {
+            pokemon.addVolatile("silvertoll", pokemon, move);
+        }
+    },
+    condition: {
+      duration: 2,
+      noCopy: true,
+      onDisableMove(pokemon) {
+        pokemon.disableMove("silvertoll");
+      }
+    },
+    target: "allAdjacent",
+    type: "Steel",
+    contestType: "Beautiful"
+  },
+  earworm: {
+    num: 5024,
+    isNonstandard: "Custom",
+    name: "Earworm",
+    accuracy: 100,
+    basePower: 95,
+    category: "Special",
+    pp: 10, // Change
+    priority: 0,
+    flags: {protect: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1 },
+    
+    // Ignore types that are immune to Poison, aka Steel
+    ignoreImmunity: {Poison: true},
+    
+    // Set the effectiveness against Steel to be neutral
+    onEffectiveness(typeMod, target, type) {
+      if (type === 'Steel') return 0;
+    },
+    type: "Poison",
+    target: "allAdjacentFoes",
+    contestType: "Beautiful"
+  },
+  legionscurse: {
+    num: 5025,
+    isNonstandard: "Custom",
+    accuracy: 90,
+    basePower: 25,
+    category: "Special",
+    name: "Legion's Curse",
+    pp: 10,
+    priority: 0,
+    flags: { mirror: 1, protect: 1 },
+    overrideOffensiveStat: "atk",
+    multihit: 5,
+    multiaccuracy: true,
+    volatileStatus: "legionscurse",
+  	onHit(target) {
+			if (this.randomChance(1, 5)) return;
+			target.addVolatile('legionscurse');
+		},
+		onAfterSubDamage(damage, target) {
+			if (this.randomChance(1, 5)) return;
+			target.addVolatile('legionscurse');
+		},
+    condition: {
+      onStart(pokemon, source) {
+        this.add("-start", pokemon, "Legion's Curse", "[of] " + source);
+      },
+      onResidualOrder: 12,
+      onResidual(pokemon) {
+        this.damage(pokemon.baseMaxhp / 8);
+      }
+    },
+    secondary: null,
+    target: "normal",
+    type: "Ghost",
+    contestType: "Tough"
+  },
+	arcanewaltz: {
+		num: 5026,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Arcane Waltz",
+		pp: 20,
+		priority: 0,
+		flags: { snatch: 1, dance: 1, metronome: 1 },
+		boosts: {
+			spa: 1,
+			spe: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Fairy",
+		zMove: { effect: 'clearnegativeboost' },
+		contestType: "Beautiful",
+	},
+  metalcrusher: {
+    num: 5027,
+    accuracy: 100,
+    basePower: 75,
+    category: "Physical",
+    name: "Metal Crusher",
+    pp: 10,
+    priority: 0,
+    flags: { contact: 1, protect: 1 },
+    onEffectiveness(typeMod, target, type) {
+      if (type === "Steel")
+        return 1;
+    },
+    secondary: null,
+    target: "normal",
+    type: "Steel",
+    contestType: "Tough"
+  },
+	glacierpulse: {
+		num: 5028,
+		accuracy: 100,
+		basePower: 70,
+		category: "Special",
+		name: "Glacier Pulse",
+		pp: 15,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, distance: 1, metronome: 1, pulse: 1 },
+		secondary: {
+			chance: 20,
+			boosts: { spd: -1 },
+		},
+		target: "any",
+		type: "Ice",
+		contestType: "Beautiful",
+	},
+	desertgale: {
+		num: 5029,
+		accuracy: 70,
+		basePower: 110,
+		category: "Special",
+		name: "Desert Gale",
+		pp: 5,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, metronome: 1, wind: 1 },
+		onModifyMove(move) {
+			if (this.field.isWeather(['sandstorm'])) move.accuracy = true;
+		},
+		target: "allAdjacentFoes",
+		type: "Ground",
+		contestType: "Tough",
+	}
 };

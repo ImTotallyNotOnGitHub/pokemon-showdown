@@ -5628,4 +5628,234 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: -3,
 	},
+// PokeClash Abilities
+  arcanethorns: {
+    onDamagingHitOrder: 1,
+    onDamagingHit(damage, target, source, move) {
+      if (move.category === "Special") {
+        this.damage(source.baseMaxhp / 8, source, target);
+      }
+    },
+    flags: {},
+    name: "Arcane Thorns",
+    rating: 2.5,
+    num: -1035
+  },
+  wavesplitter: {
+    onBasePowerPriority: 19,
+    onBasePower(basePower, attacker, defender, move) {
+      if (move.flags["pulse"]) {
+        return this.chainModify(0.75);
+      }
+    },
+    onModifyMovePriority: 1,
+    onModifyMove(move, pokemon) {
+      if (move.flags["pulse"]) {
+        move.multihit = 2;
+      }
+    },
+    flags: {},
+    name: "Wave Splitter",
+    rating: 3,
+    num: -1000
+  },
+  orbit: {
+    onFoeTrapPokemon(pokemon) {
+    // Checks if a Pokemon is airborne then traps (like Shadow Tag/Arena Trap)
+    // then applies a volatile called 'orbit' to prevent selfswitch moves
+      let type = pokemon.getTypes()[0];
+	  type = type ? type[0].toUpperCase() + type.slice(1) : type;
+      const isAirborne =
+        pokemon.getTypes().includes('Flying') ||
+        pokemon.terastallized && type === 'Flying' ||
+        pokemon.hasAbility('Levitate') ||
+        pokemon.hasItem('airballoon') ||
+        pokemon.volatiles['magnetrise'] ||
+        pokemon.volatiles['telekinesis'];
+      const holder = this.effectState.target;
+      if (isAirborne && pokemon.isAdjacent(holder)) {
+        pokemon.tryTrap(true);
+        pokemon.addVolatile('orbit', holder);
+      }
+    },
+    // this checks if the pokemon has the volatile and then prevents them from executing the move
+    onFoeBeforeMove(pokemon, target, move) {
+      let type = pokemon.getTypes()[0];
+	  type = type ? type[0].toUpperCase() + type.slice(1) : type;
+      const isAirborne =
+        pokemon.getTypes().includes('Flying') ||
+        pokemon.terastallized && type === 'Flying' ||
+        pokemon.hasAbility('Levitate') ||
+        pokemon.hasItem('airballoon') ||
+        pokemon.volatiles['magnetrise'] ||
+        pokemon.volatiles['telekinesis'];
+      const holder = this.effectState.target;
+	  
+      if (pokemon.isAdjacent(holder) && (pokemon.volatiles['orbit'] || isAirborne) && move.selfSwitch) {
+        this.attrLastMove('[still]');
+        this.add('cant', pokemon, 'ability: Orbit');
+        return false;
+      }
+    },
+    onEnd(pokemon) {
+      for (const foe of pokemon.foes()) {
+        if (foe.volatiles['orbit']) {
+          foe.removeVolatile('orbit');
+        }
+      }
+    },
+    // the following makes it so the volatile is infinite and is SUPPOSED to cleanse and allow them
+    // to self switch and manually/raw switch if they are no longer airborne OR become trapped
+    // if they become airborne. Right now, it applies but not dynamically within the turn and applies
+    // the next turn thereafter for type changes like Terastallization, allowing them to manually/raw
+    // switch but still cannot self switch, likely due to the volatile not properly ending.
+    condition: {
+      noCopy: true,
+      duration: 0,
+      onUpdate(pokemon) {
+        let type = pokemon.getTypes()[0];
+	    type = type ? type[0].toUpperCase() + type.slice(1) : type;
+        const isAirborne =
+          pokemon.getTypes().includes('Flying') ||
+          pokemon.terastallized && type === 'Flying' ||
+          pokemon.hasAbility('Levitate') ||
+          pokemon.hasItem('airballoon') ||
+          pokemon.volatiles['magnetrise'] ||
+          pokemon.volatiles['telekinesis'];
+        const holder = this.effectState.source;
+        if (isAirborne && pokemon.isAdjacent(holder)) {
+		  if (!pokemon.volatiles['orbit']) {
+		    pokemon.tryTrap(true);
+		    pokemon.addVolatile('orbit', holder);
+		  }
+	    } else if (pokemon.volatiles['orbit']) {
+		  this.add('-end', pokemon, 'Orbit');
+		  pokemon.removeVolatile('orbit');
+        }
+	  }
+    },
+    flags: {},
+    name: "Orbit",
+    rating: 3,
+    num: -1004,
+  },
+  creakingheart: {
+    isNonstandard: "Custom",
+		onModifyMovePriority: 1,
+		// Runs before the move used
+		onModifyMove(move, attacker, defender) {
+	  	if (attacker.transformed) return;
+	  /*
+	   * Selects the forme
+	   * If the move used is Phantom Proxy -> Switch to Creaking Forme
+	   * If the move used is a Status Move (excluding Phantom Proxy) -> Switch to Base Forme
+	   * Else -> Do not change Forme
+	  */
+	  	const base = attacker.species.baseSpecies;
+	    const targetForme = move.id === "phantomproxy" ? `${base}-Craftia-Creaking` : move.category === "Status" ? `${base}-Craftia` : null;
+	  	if (!targetForme) return;
+	  	if (attacker.species.name !== targetForme) attacker.formeChange(targetForme);
+		},	
+		flags: { failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, cantsuppress: 1 },
+		name: "Creaking Heart",
+		rating: 3,
+		num: -1005
+  },
+  laststand: {
+    isNonstandard: "Custom",
+	onStart(pokemon) {
+	  this.effectState.activated = false;
+	  
+	  // If the Pokemon enters the fight with less than 50% hp initially
+	  if (pokemon.hp > 0 && pokemon.hp * 2 <= pokemon.maxhp) {
+		// Activate Last Stand
+		this.effectState.activated = true;
+		// "cobblemon.battle.activate.laststand": "%1$s's Last Stand activated!" (lang)
+		this.add('-activate', pokemon, 'ability: Last Stand');
+	  }
+	},
+	
+	// onEmergencyExit is run when damage is done, allows for immediate activation of Last Stand + Attack boost
+	// Contents identical to onStart()
+	onEmergencyExit(pokemon) {
+	  if (this.effectState.activated) return;
+	  
+	  // If the Pokemon is reduced to less than 50% hp during the fight
+	  if (pokemon.hp > 0 && pokemon.hp * 2 <= pokemon.maxhp) {
+		// Activate Last Stand
+		this.effectState.activated = true;
+		// "cobblemon.battle.activate.laststand": "%1$s's Last Stand activated!" (lang)
+		this.add('-activate', pokemon, 'ability: Last Stand');
+	  }
+	},
+	
+	// +1 crit stage
+	onModifyCritRatio(critRatio, source) {
+	  if (source === this.effectState.target && this.effectState.activated) return critRatio + 1;
+	},
+	
+	// Prevents manual switching (Switch button)
+	onTrapPokemon(pokemon) {
+	  if (this.effectState.activated) pokemon.trapped = true;
+	},
+	
+	// Prevents moves like Roar/Dragon Tail from swapping the user out
+			// REMOVE /* AND */ BELOW TO ENABLE THIS!
+	/*
+	onDragOut(pokemon) {
+	  if (this.effectState.activated) {
+		// "cobblemon.battle.fail.laststand": "But %1$s can't switch out due to Last Stand!" (lang)
+		this.add('-fail', pokemon, 'ability: Last Stand');
+		return false;
+	  }
+	},
+	*/
+	
+	// Prevents self-switch moves (U-Turn, Volt Switch, etc)
+	onModifyMove(move, attacker) {
+	  if (!this.effectState.activated) return;
+	  if (attacker !== this.effectState.target) return;
+	  if (move.selfSwitch) {
+	    delete move.selfSwitch;
+		// This runs before the move itself
+		// Therefore instead of having the message be here, set a field and have it run later
+		move.lastStandBlocked = true;
+	  }
+	},
+	
+	// Used to send the "later" fail message, so that it does not send before the move in the battle log
+	onAfterMoveSecondarySelf(pokemon, target, move) {
+	  if (!this.effectState.activated) return;
+	  if (pokemon !== this.effectState.target) return;
+	  if (move && move.lastStandBlocked) {
+		// "cobblemon.battle.fail.laststand": "But %1$s can't switch out due to Last Stand!" (lang)
+		this.add('-fail', pokemon, 'ability: Last Stand');
+	  }
+	},
+    flags: { failroleplay: 1, noreceiver: 1, notrace: 1, failskillswap: 1, breakable: 1 },
+    name: "Last Stand",
+    rating: 3,
+    num: -1006
+  },
+  frighten: {
+    isNonstandard: "Custom",
+    onStart(pokemon) {
+      let activated = false;
+      for (const target of pokemon.adjacentFoes()) {
+        if (!activated) {
+          this.add("-ability", pokemon, "Frighten", "boost");
+          activated = true;
+        }
+        if (target.volatiles["substitute"]) {
+          this.add("-immune", target);
+        } else {
+          this.boost({ spa: -1 }, target, pokemon, null, true);
+        }
+      }
+    },
+    flags: {},
+    name: "Frighten",
+    rating: 3.5,
+    num: -1007
+  }
 };
