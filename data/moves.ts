@@ -22444,7 +22444,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 	glacierpulse: {
 		num: 5028,
 		accuracy: 100,
-		basePower: 70,
+		basePower: 80,
 		category: "Special",
 		name: "Glacier Pulse",
 		pp: 15,

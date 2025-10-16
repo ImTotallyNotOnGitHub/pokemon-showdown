@@ -6055,4 +6055,354 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "Illegal",
 		natDexTier: "RU"
 	},
+	fossie: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "LC"
+	},
+	amperox: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	larvern: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "LC"
+	},
+	drakoon: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "NFE"
+	},
+	lukadra: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	cannoling: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "LC"
+	},
+	holinoli: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "NFE"
+	},
+	dracanoli: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	suikani: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	masquerjade: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	karstory: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	chewshire: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	misteamie: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	oremand: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	flapestry: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	desmotel: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	salamarine: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	hueblow: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	kamerog: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	valgarette: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	poseiclops: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	alpioca: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	nurumone: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	magnipulo: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+  	protoffin: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+  	potatinator: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	sereneon: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+  	griffeon: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	tentaquil: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	cherifaun: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	halomari: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	barkslock: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	infernix: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	prowloon: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+  	maractaya: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+  	ufi: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+  	brazenhorn: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	ironvice: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	torraoka: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	pyrong: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+  	griferis: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Uber"
+  	},
+	tridion: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	abyssyringe: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	cramber: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	puffoon: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	stouthound: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	berrock: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	lucenttail: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	feralwish: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	toxicmelody: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	irondrone: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	ironvictory: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	ironcore: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	ironjustice: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
+	umeltaka: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	nebyura: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	starlode: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	warquila: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	weezplode: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RU"
+	},
+	mechabang: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
+	ironripple: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	wildspark: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	hyrealis: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	ranabyss: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+  	bowldozer: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+  	},
+  	ferrosleyer: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+  	},
+  	ursashock: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+  	},
+  	jacturne: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+  	},
+  	fimbulven: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+  	},
+  	turalyzer: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+  	}
 };
