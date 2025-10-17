@@ -2281,4 +2281,35 @@ export const AbilitiesText: { [id: IDEntry]: AbilityText } = {
 
 		activate: "  [POKEMON] extends [MOVE] by 2 turns!",
 	},
+	// PokeClash Abilities
+	arcanethorns: {
+		name: "Arcane Thorns",
+		desc: "Pokemon using special attacking moves against this Pokemon lose 1/8 of their maximum HP, rounded down.",
+		shortDesc: "Pokemon using special attacking moves against this Pokemon lose 1/8 of their maximum HP.",
+	},
+	creakingheart: {
+		name: "Creaking Heart",
+		desc: "This Pokemon's switches into Active forme when using Phantom Proxy and switches to Dormant forme when using other status moves.",
+		shortDesc: "Switches forme based on move used. Phantom Proxy = Active, Status moves = Dormant.",
+	},
+	frighten: {
+		name: "Frighten",
+		desc: "On switch-in, this Pokemon lowers the Special Attack of all adjacent opponents by 1 stage.",
+		shortDesc: "On switch-in, lowers the Sp. Atk of all adjacent opponents by 1 stage.",
+	},
+	laststand: {
+		name: "Last Stand",
+		desc: "When this Pokemon's HP is below 1/2 of its maximum HP, it's critical hit ratio is increased by 1 stage and it is unable to switch-out.",
+		shortDesc: "At 1/2 or less of its max HP, this Pokemon's crit ratio is +1 and it can't switch out.",
+	},
+	orbit: {
+		name: "Orbit",
+		desc: "This Pokemon prevents opposing Flying-type and airborne Pokemon from fleeing or switching out, including through the use of self-switch moves like U-Turn.",
+		shortDesc: "Prevents Flying-type and airborne foes from fleeing or switching out.",
+	},
+	wavesplitter: {
+		name: "Wave Splitter",
+		desc: "This Pokemon's pulse moves hit twice at 0.75x power.",
+		shortDesc: "This Pokemon's pulse moves hit twice at 0.75x power.",
+	}
 };

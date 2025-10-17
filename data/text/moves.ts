@@ -7612,4 +7612,75 @@ export const MovesText: { [id: IDEntry]: MoveText } = {
 			shortDesc: "Nearly always goes first. Always crits.",
 		},
 	},
+	// PokeClash Moves
+	arcanewaltz: {
+		name: "Arcane Waltz",
+		desc: "Raises the user's Special Attack and Speed by 1 stage.",
+		shortDesc: "Raises the user's Sp. Atk and Spe by 1.",
+	},
+	desertgale: {
+		name: "Desert Gale",
+		desc: "If the weather is sandstorm, this move does not check accuracy.",
+		shortDesc: "Can't miss in Sand.",
+	},
+	earworm: {
+		name: "Earworm",
+		desc: "This Poison-type move can hit Steel-type Pokemon, regardless of immunity.",
+		shortDesc: "Hits Steel-types regardless of immunity."
+	},
+	galeforce: {
+		name: "Galeforce",
+		desc: "The power of this move is doubled if there is weather active. Afterwards, the active weather is cleared.",
+		shortDesc: "Doubles power if weather is active. Clears weather afterwards."
+	},
+	glacierpulse: {
+		name: "Glacier Pulse",
+		desc: "This move has a 20% chance to lower the target's Speed by 1 stage.",
+		shortDesc: "Pulse move. 20% chance to lower target's Speed by 1."
+	},
+	grandfinale: {
+		name: "Grand Finale",
+		desc: "The power of this move is doubled if there are screens set on the opposing side of the field. Afterwards, all screens on the opposing side of the field are cleared.",
+		shortDesc: "Doubles power if screens are set. Clears screens afterwards."
+	},
+	legionscurse: {
+		name: "Legion's Curse",
+		desc: "This move hits up to 5 times. Each hit has a 20% chance to afflict a curse that deals 1/8 of the target's maximum HP at the end of each turn. If the target switches out, the effect ends. This effect is not stackable or reset by using this move again.",
+		shortDesc: "Hits up to 5 times. Target loses 1/8 max HP each turn.",
+	},
+	metalcrusher: {
+		name: "Metal Crusher",
+		desc: "This move deals supereffective damage against Steel-type Pokemon.",
+		shortDesc: "Deals supereffective damage to Steel-types.",
+	},
+	phantomproxy: {
+		name: "Phantom Proxy",
+		desc: "Sets a substitute with HP equal to 1/4 of the user's HP that costs 2/5 of the user's HP.",
+		shortDesc: "Usually goes first. 25% HP sub for 40% HP.",
+	},
+	silvertoll: {
+		name: "Silver Toll",
+		desc: "This move hits all adjacent Pokemon. If an ally had fainted the previous turn, this move deals 1.5x damage but cannot be selected again next turn.",
+		shortDesc: "Hits all adjacent Pokemon. 1.5x if ally fainted last turn but locks move next turn.",
+	},
+	synapticblade: {
+		name: "Synaptic Blade",
+		desc: "This move calculates damage based on the target's Special Defense.",
+		shortDesc: "Uses Sp. Def to calc damage.",
+	},
+	terraform: {
+		name: "Terraform",
+		desc: "The power of this move is doubled if there is terrain active. Afterwards, the active terrain is cleared.",
+		shortDesc: "Doubles power if terrain is active. Clears terrain afterwards."
+	},
+	thunderouswrath: {
+		name: "Thunderous Wrath",
+		desc: "The user spends two or three turns locked into this move and becomes confused immediately after its move on the last turn of the effect if it is not already. This move targets an opposing Pokemon at random on each turn. If the user is prevented from moving, is asleep at the beginning of a turn, or the attack is not successful against the target on the first turn of the effect or the second turn of a three-turn effect, the effect ends without causing confusion. If this move is called by Sleep Talk and the user is asleep, the move is used for one turn and does not confuse the user.",
+		shortDesc: "Lasts 2-3 turns. Confuses the user afterwards."
+	},
+	tidalpurge: {
+		name: "Tidal Purge",
+		desc: "The power of this move is doubled if there are hazards set on the user's side of the field. Afterwards, all hazards on the user's side of the field are cleared.",
+		shortDesc: "Doubles power if hazards are set. Clears hazards afterwards."
+	},
 };
