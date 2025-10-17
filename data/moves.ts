@@ -22473,5 +22473,92 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Ground",
 		contestType: "Tough",
-	}
+	},
+    riteofichor: {
+    num: 5000,
+    name: "Rite of Ichor",
+    accuracy: 100,
+    basePower: 75,
+    category: "Special",
+    isNonstandard: "Custom",
+    pp: 10,
+    priority: 0,
+    flags: {protect: 1, mirror: 1},
+    onAfterHit(target, source, move) {
+      if (!source || source.fainted) return;
+      
+      if (!this.randomChance(40, 100)) {
+        this.add('-fail', source);
+        return;
+      }
+      
+      this.add('-activate', source, 'move: ' + move.name);
+
+      const stats = ['atk', 'def', 'spa', 'spd', 'spe'];
+      let bestStat = stats[0];
+      let bestValue = source.getStat(bestStat, false, true);
+      for (const stat of stats.slice(1)) {
+        const val = source.getStat(stat, false, true);
+        if (val > bestValue) {
+          bestValue = val;
+          bestStat = stat;
+        }
+      }
+      this.boost({[bestStat]: 1}, source, source, move);
+    },
+    onPrepareHit: function(target, source) {
+      this.attrLastMove('[still]');
+      this.add('-anim', source, 'Dark Pulse', target);
+    },
+    type: "Dark",
+    target: "normal",
+    contestType: "Clever",
+  },
+  scarabswarm: {
+    num: 5023,
+    isNonstandard: "Custom",
+    accuracy: 100,
+    basePower: 60,
+    category: "Physical",
+    name: "Scarab Swarm",
+    pp: 10,
+    priority: 0,
+    flags: { mirror: 1, protect: 1 },
+    condition: {
+      noCopy: true,
+      duration: 3,
+      onStart(pokemon) {
+        this.add("-start", pokemon, "Scarab Swarm");
+        this.add("-message", `${pokemon.name} has been swarmed!`)
+      },
+      onResidualOrder: 13,
+      onResidual(pokemon) {
+        const stacks = this.effectState.counter || 1;
+        this.damage((pokemon.baseMaxhp / 16) * stacks);
+        this.add('-message', `Residual damage from scarab swarm`);
+      },
+      // Bug type deals 2x damage, implemented similarly to Tar Shot
+      onEffectivenessPriority: -2,
+      onEffectiveness(typeMod, target, type, move) {
+        if (move.type !== "Bug")
+          return;
+        if (!target)
+          return;
+        if (type !== target.getTypes()[0])
+          return;
+        return typeMod + 1;
+      },
+      onEnd(pokemon) {
+        this.add("-end", pokemon, "Scarab Swarm");
+        this.add("-message", `${pokemon.name}'s swarm faded`)
+      }
+    },
+    secondary: {
+      chance: 100,
+      volatileStatus: "scarabswarm"
+    },
+    target: "normal",
+    type: "Bug",
+    contestType: "Clever"
+  }
 };
