@@ -5641,20 +5641,20 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 2.5,
 		num: -1035
 	},
-	augment: {
-		onModifyPriority(priority, pokemon, target, move) {
+augment: {
+	onModifyPriority(priority, pokemon, target, move) {
 		if (move?.category === 'Status') {
-			if (pokemon.status && !target.hasType('Ghost')) {
-			move.pranksterBoosted = true;
-			return priority + 2;
+			if (pokemon.status && (!target || !target.hasType('Ghost'))) {
+				move.pranksterBoosted = true;
+				return priority + 2;
 			}
 		}
-		},
-		flags: {},
-		name: "Augment",
-		rating: 4,
-		num: -1001,
 	},
+	flags: {},
+	name: "Augment",
+	rating: 4,
+	num: -1001,
+},
 	wavesplitter: {
 		onBasePowerPriority: 19,
 		onBasePower(basePower, attacker, defender, move) {
