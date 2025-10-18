@@ -22560,5 +22560,36 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
     target: "normal",
     type: "Bug",
     contestType: "Clever"
-  }
+  },
+  steelspikes: {
+    num: 5008,
+    accuracy: true,
+    basePower: 0,
+    category: "Status",
+    isNonstandard: "Custom",
+    name: "Steel Spikes",
+    pp: 20,
+    priority: 0,
+    flags: { reflectable: 1, metronome: 1, mustpressure: 1 },
+    isMax: false,
+    sideCondition: "steelspikes",
+    condition: {
+      onSideStart(side) {
+        this.add("-sidestart", side, "move: Steel Spikes");
+      },
+      onEntryHazard(pokemon) {
+        if (pokemon.hasItem("heavydutyboots"))
+          return;
+        const steelHazard = this.dex.getActiveMove("Stealth Rock");
+        steelHazard.type = "Steel";
+        const typeMod = this.clampIntRange(pokemon.runEffectiveness(steelHazard), -6, 6);
+        this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
+      }
+    },
+    secondary: null,
+    target: "foeSide",
+    type: "Steel",
+    zMove: { boost: { def: 1} },
+    contestType: "Cool"
+  },
 };
