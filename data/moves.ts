@@ -22561,34 +22561,45 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
     type: "Bug",
     contestType: "Clever"
   },
-  steelspikes: {
-    num: 5008,
-    accuracy: true,
-    basePower: 0,
-    category: "Status",
-    isNonstandard: "Custom",
-    name: "Steel Spikes",
-    pp: 20,
-    priority: 0,
-    flags: { reflectable: 1, metronome: 1, mustpressure: 1 },
-    sideCondition: "steelspikes",
-    condition: {
-      onSideStart(side) {
-        this.add("-sidestart", side, "move: Steel Spikes");
-      },
-      onEntryHazard(pokemon) {
-        if (pokemon.hasItem("heavydutyboots"))
-          return;
-        const steelHazard = this.dex.getActiveMove("Stealth Rock");
-        steelHazard.type = "Steel";
-        const typeMod = this.clampIntRange(pokemon.runEffectiveness(steelHazard), -6, 6);
-        this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
+steelspikes: {
+  num: 5008,
+  accuracy: true,
+  basePower: 0,
+  category: "Status",
+  isNonstandard: "Custom",
+  name: "Steel Spikes",
+  pp: 20,
+  priority: 0,
+  flags: { reflectable: 1, metronome: 1, mustpressure: 1 },
+  sideCondition: "steelspikes",
+  condition: {
+    onSideStart(side) {
+      this.add('-sidestart', side, 'move: Steel Spikes');
+    },
+    onSwitchIn(pokemon) {
+      if (pokemon.hasItem('heavydutyboots')) return;
+
+      // Simulate a Steel-type damage interaction (like Stealth Rock)
+      const steelTypeEffect = {
+        type: 'Steel',
+        category: 'Status',
+        id: 'steelspikesdamage',
+        name: 'Steel Spikes',
+      };
+
+      const typeMod = this.clampIntRange(pokemon.runEffectiveness(steelTypeEffect), -6, 6);
+      if (typeMod === 0) return;
+
+      const damage = this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
+      if (damage || damage === 0) {
+        this.add('-message', `${pokemon.name} was hurt by Steel Spikes!`);
       }
     },
-    secondary: null,
-    target: "foeSide",
-    type: "Steel",
-    zMove: { boost: { def: 1} },
-    contestType: "Cool"
   },
+  secondary: null,
+  target: "foeSide",
+  type: "Steel",
+  zMove: { boost: { def: 1 } },
+  contestType: "Cool",
+},
 };
