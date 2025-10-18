@@ -3578,7 +3578,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		onHit(target, source, move) {
 			let success = false;
 			if (!target.volatiles['substitute'] || move.infiltrates) success = !!this.boost({ evasion: -1 });
-			const removeAll = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
+			const removeAll = ['spikes', 'toxicspikes', 'stealthrock', 'steelspikes', 'stickyweb', 'gmaxsteelsurge'];
 			const removeTarget = ['reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', ...removeAll];
 			for (const targetCondition of removeTarget) {
 				if (target.side.removeSideCondition(targetCondition)) {
@@ -15235,7 +15235,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
 					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', `[of] ${pokemon}`);
 				}
-				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
+				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'steelspikes', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
 					if (pokemon.hp && pokemon.side.removeSideCondition(condition)) {
 						this.add('-sideend', pokemon.side, this.dex.conditions.get(condition).name, '[from] move: Rapid Spin', `[of] ${pokemon}`);
@@ -15251,7 +15251,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
 					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', `[of] ${pokemon}`);
 				}
-				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
+				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'steelspikes', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
 					if (pokemon.hp && pokemon.side.removeSideCondition(condition)) {
 						this.add('-sideend', pokemon.side, this.dex.conditions.get(condition).name, '[from] move: Rapid Spin', `[of] ${pokemon}`);
@@ -22160,7 +22160,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
       		}
 		},
     	onHit(target, source, move) {
-      		const hazards = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb'];
+      		const hazards = ['spikes', 'toxicspikes', 'stealthrock', 'steelspikes', 'stickyweb'];
       		for (const hazard of hazards) {
         		if (source.side.getSideCondition(hazard)) {
           			source.side.removeSideCondition(hazard);
@@ -22571,7 +22571,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
     pp: 20,
     priority: 0,
     flags: { reflectable: 1, metronome: 1, mustpressure: 1 },
-    isMax: false,
     sideCondition: "steelspikes",
     condition: {
       onSideStart(side) {
