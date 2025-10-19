@@ -2466,6 +2466,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		doublesTier: "(DUU)",
 		natDexTier: "RU",
 	},
+	torterramega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
+	},
 	chimchar: {
 		tier: "LC",
 	},
@@ -2477,6 +2482,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		doublesTier: "(DUU)",
 		natDexTier: "RU",
 	},
+	infernapemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL"
+	},
 	piplup: {
 		tier: "LC",
 	},
@@ -2487,6 +2497,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "RU",
 		doublesTier: "(DUU)",
 		natDexTier: "RU",
+	},
+	empoleonmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Uber"
 	},
 	starly: {
 		tier: "LC",
@@ -3880,6 +3895,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "ZU",
 		doublesTier: "(DUU)",
 		natDexTier: "RU",
+	},
+	clawitzermega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL"
 	},
 	helioptile: {
 		isNonstandard: "Past",
@@ -6304,6 +6324,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "RUBL"
+	},
+	crimsonveil: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Uber"
 	},
 	irondrone: {
 		isNonstandard: "Custom",

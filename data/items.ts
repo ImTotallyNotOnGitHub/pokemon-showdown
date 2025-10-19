@@ -7696,4 +7696,61 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		gen: 8,
 		isNonstandard: "CAP",
 	},
+// PokeClash Exclusive Items
+	clawitzerite: {
+		name: "Clawitzerite",
+		spritenum: -2,
+		megaStone: "Clawitzer-Mega",
+		megaEvolves: "Clawitzer",
+		itemUser: ["Clawitzer"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -2,
+		gen: 9,
+		isNonstandard: "Custom",
+	},
+	empoleonite: {
+		name: "Empoleonite",
+		spritenum: -3,
+		megaStone: "Empoleon-Mega",
+		megaEvolves: "Empoleon",
+		itemUser: ["Empoleon"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -3,
+		gen: 9,
+		isNonstandard: "Custom",
+	},
+	infernapite: {
+		name: "Infernapite",
+		spritenum: -4,
+		megaStone: "Infernape-Mega",
+		megaEvolves: "Infernape",
+		itemUser: ["Infernape"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -4,
+		gen: 9,
+		isNonstandard: "Custom",
+	},
+	torterrite: {
+		name: "Torterrite",
+		spritenum: -5,
+		megaStone: "Torterra-Mega",
+		megaEvolves: "Torterra",
+		itemUser: ["Torterra"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -5,
+		gen: 9,
+		isNonstandard: "Custom",
+	}
 };
