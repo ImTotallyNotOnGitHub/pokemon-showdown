@@ -5873,19 +5873,45 @@ augment: {
 		num: -1007
 	},
   royalhusk: {
-    isNonstandard: "Custom",
-    onResidualOrder: 28,
-    onResidualSubOrder: 2,
-    onResidual(pokemon) {
-      for (const foe of pokemon.foes()) {
-        if (foe.volatiles["scarabswarm"]) {
-          this.boost({ def: 1 });
-        }
-      }   
+    // Prevents defense drop from foes' moves/abilities
+    onTryBoost(boost, target, source, effect) {
+      if (source && source !== target && boost.def && boost.def < 0) {
+        // Remove the defense property (cancels the defense reduction)
+        delete boost.def;
+        // Sends a message in the battle log about it failing to reduce defense
+        this.add('-fail', target, 'unboost', 'Defense', '[from] ability: Royal Husk');
+      }
     },
+    
+    // Tracks number of foes that are inflicted with Scarab Swarm each turn
+    onStart(pokemon) {
+      this.effectState.prevCount = 0;
+    },
+    
+    // End of each turn, compare current number of Scarab Swarm inflicted foes with last turn
+    // Readjusts the defense based on that value
+    onResidual(pokemon) {
+      const want = pokemon.foes().filter(foe => foe && foe.volatiles && foe.volatiles['scarabswarm']).length;
+      const applied = this.effectState.prevCount || 0;
+      let diff = want - applied;
+      if (!diff) return;
+
+      // If we need to add but total Defense is already at +6, skip
+      // This avoids lowering the Defense after scarab swarm ends if it was not responsible for raising Defense
+      if (diff > 0 && (pokemon.boosts.def || 0) >= 6) {
+        return;
+      }
+
+      const before = pokemon.boosts.def || 0;
+      this.boost({def: diff}, pokemon);
+      const after = pokemon.boosts.def || 0;
+      const actual = after - before;
+      this.effectState.prevCount = applied + actual;
+    },
+
     flags: {},
     name: "Royal Husk",
-    rating: 4,
-    num: -1005
+    rating: 3,
+    num: -9020
   },
 	};
