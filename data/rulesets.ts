@@ -103,7 +103,7 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		name: 'NatDex Mod',
 		desc: "Mechanics for National Dex formats",
 		ruleset: [
-			'+Unobtainable', '+Past', 'Sketch Post-Gen 7 Moves',
+			'+Unobtainable', '+Past', '+Custom', 'Sketch Post-Gen 7 Moves',
 		],
 		onValidateSet(set) {
 			const species = this.dex.species.get(set.species);
