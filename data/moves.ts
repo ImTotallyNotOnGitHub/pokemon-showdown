@@ -22574,20 +22574,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		sideCondition: "steelspikes",
 		condition: {
 			onSideStart(side) {
-			this.add('-sidestart', side, 'move: Steel Spikes');
+				this.add('-sidestart', side, 'move: Steel Spikes');
 			},
 			onSwitchIn(pokemon) {
-			if (pokemon.hasItem('heavydutyboots')) return;
-
-			// Calculate effectiveness of Steel against this Pokémon
-			const typeMod = this.dex.getEffectiveness('Steel', pokemon);
-			const clampedMod = this.clampIntRange(typeMod, -6, 6);
-			if (clampedMod === 0) return;
-
-			const damage = this.damage(pokemon.maxhp * Math.pow(2, clampedMod) / 8);
-			if (damage || damage === 0) {
-				this.add('-message', `${pokemon.name} was hurt by Steel Spikes!`);
-				}
+				if (pokemon.hasItem('heavydutyboots')) return;
+				const typeMod = this.clampIntRange(pokemon.runEffectiveness(this.dex.getActiveMove('steelspikes')), -6, 6);
+				this.damage(pokemon.maxhp * (2 ** typeMod) / 8);
 			},
 		},
 		secondary: null,
