@@ -6429,5 +6429,25 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "Illegal"
-  	}
+  	},
+	skeetobelle: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	fenskito: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	beelzebuzz: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	beelzebuzzf: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	}
 };
