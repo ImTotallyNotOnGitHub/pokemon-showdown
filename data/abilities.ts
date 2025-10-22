@@ -5872,6 +5872,29 @@ augment: {
 		rating: 3.5,
 		num: -1007
 	},
+heartofthesea: {
+  onStart(pokemon) {
+    this.add('-ability', pokemon, 'Heart of the Sea');
+    this.add('-message', `${pokemon.name}'s defenses now act as if it's a pure Water type!`);
+  },
+  onEffectiveness(typeMod, target, type, move) {
+    if (!target || !move) return;
+    if (move.category === 'Status') return; // Status moves don't deal damage
+
+    // Simulate being pure Water type on defense
+    const waterEffectiveness = this.dex.getEffectiveness(move, 'Water');
+    const actualEffectiveness = this.dex.getEffectiveness(move, type);
+
+    // Adjust typeMod to reflect Water-type instead of actual type
+    // Replace effectiveness only on first type (since we're treating it as monotype)
+    if (type === target.types[0]) {
+      return waterEffectiveness - actualEffectiveness;
+    }
+  },
+  name: "Heart of the Sea",
+  rating: 3.5,
+  num: -9999, // Custom number
+},
   royalhusk: {
     // Prevents defense drop from foes' moves/abilities
     onTryBoost(boost, target, source, effect) {
