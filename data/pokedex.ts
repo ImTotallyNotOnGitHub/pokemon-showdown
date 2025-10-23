@@ -21621,5 +21621,16 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 150,
 		color: "Pink",
 		eggGroups: ["Bug"]
+	},
+	miralspine: {
+		num: -1015,
+		name: "Miralspine",
+		types: ["Rock", "Fairy"],
+		baseStats: { hp: 71, atk: 70, def: 59, spa: 121, spd: 118, spe: 82 },
+		abilities: { 0: "Magic Guard", H: "Regenerator" },
+		heightm: 1.9,
+		weightkg: 95,
+		color: "Pink",
+		eggGroups: ["Fairy", "Dragon"]
 	}
 };
