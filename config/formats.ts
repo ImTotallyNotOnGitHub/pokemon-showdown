@@ -2984,6 +2984,12 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			this.add(`raw|Anyone who is there can help create a new set for a random mon, changing moves, abilities, stats, and even custom formes.`);
 		},
 	},
+	{
+		name: "[Gen 9] KnC Unite",
+		desc: `Kingdoms and Conquests: Unite.`,
+		mod: 'kncunite',
+		ruleset: ['Species Clause', 'HP Percentage Mod', 'Sleep Clause Mod', 'Data Preview', 'Cancel Mod'],
+	},
 
 	// Randomized Format Spotlight
 	///////////////////////////////////////////////////////////////////
