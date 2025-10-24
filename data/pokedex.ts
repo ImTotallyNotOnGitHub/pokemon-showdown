@@ -21632,5 +21632,27 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 95,
 		color: "Pink",
 		eggGroups: ["Fairy", "Dragon"]
+	},
+	calciopi: {
+		num: -1016,
+		name: "Calciopi",
+		types: ["Rock", "Ghost"],
+		baseStats: { hp: 80, atk: 60, def: 100, spa: 108, spd: 132, spe: 32 },
+		abilities: { 0: "Cursed Body", H: "Soundproof" },
+		heightm: 1.9,
+		weightkg: 42.5,
+		color: "Gray",
+		eggGroups: ["Monster"]
+	},
+	buzzlex: {
+		num: -1017,
+		name: "Buzzlex",
+		types: ["Rock", "Bug"],
+		baseStats: { hp: 70, atk: 110, def: 88, spa: 74, spd: 66, spe: 87 },
+		abilities: { 0: "Tinted Lens", H: "Infiltrator" },
+		heightm: 0.2,
+		weightkg: 0.4,
+		color: "Brown",
+		eggGroups: ["Bug", "Mineral"]
 	}
 };
