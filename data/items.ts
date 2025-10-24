@@ -7707,7 +7707,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -2,
+		num: -3,
 		gen: 9,
 		isNonstandard: "Custom",
 	},
@@ -7721,7 +7721,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -3,
+		num: -4,
 		gen: 9,
 		isNonstandard: "Custom",
 	},
@@ -7735,7 +7735,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -4,
+		num: -5,
 		gen: 9,
 		isNonstandard: "Custom",
 	},
@@ -7749,7 +7749,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -5,
+		num: -6,
 		gen: 9,
 		isNonstandard: "Custom",
 	}
