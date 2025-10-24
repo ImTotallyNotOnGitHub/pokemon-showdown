@@ -7,7 +7,8 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			pursuit: ["9M"],
 			slash: ["9M"],
 			psychocut: ["9M"],
-			suckerpunch: ["9M"]
+			suckerpunch: ["9M"],
+			bonechill: ["9M"]
 		}
 	}
 };
