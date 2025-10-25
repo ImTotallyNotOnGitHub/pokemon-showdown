@@ -2988,6 +2988,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		name: "[Gen 9] KnC Unite",
 		desc: `Kingdoms and Conquests: Unite.`,
 		mod: 'kncunite',
+		gameType: "triples",
 		ruleset: [
 			'Species Clause',
 			'HP Percentage Mod',
@@ -3002,7 +3003,8 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Evasion Moves Clause',
 			'Z-Move Clause',
 			'Dynamax Clause',
-			'Terastal Clause'
+			'Terastal Clause',
+			'Max Team Size = 5'
 		],
 		banlist: [
 			'All Pokemon',
