@@ -8,7 +8,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		pp: 1,
 		noPPBoosts: true,
 		priority: 0,
-		flags: { contact: 1, mirror: 1, slicing: 1 },
+		flags: { contact: 1, mirror: 1, protect: 1, slicing: 1, unite: 1 },
 		multihit: 6,
 		smartTarget: true,
 		critRatio: 2,

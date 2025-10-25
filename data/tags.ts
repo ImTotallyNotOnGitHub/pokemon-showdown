@@ -129,6 +129,10 @@ export const Tags: { [id: IDEntry]: TagData } = {
 		name: "G-Max Move",
 		moveFilter: move => typeof move.isMax === 'string',
 	},
+	unitemove: {
+		name: "Unite Move",
+		moveFilter: move => 'unite' in move.flags
+	},
 
 	// Tiers
 	// -----
