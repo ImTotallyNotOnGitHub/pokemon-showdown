@@ -3098,7 +3098,6 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Big Root',
 			'Choice Scarf',
 			'Choice Specs',
-			'Exp. Share',
 			'Float Stone',
 			'Focus Band',
 			'Leftovers',
