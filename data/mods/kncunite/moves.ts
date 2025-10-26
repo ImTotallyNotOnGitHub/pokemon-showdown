@@ -74,6 +74,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	coupdegrace: {
 		num: -5002,
+		desc: "Aegislash unleashes a ground-splitting slash, dealing doubled damage if the target is not at full HP.",
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
@@ -151,7 +152,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	hydrotyphoon: {
 		num: -5004,
 		accuracy: 100,
-		basePower: 160,
+		basePower: 100,
 		category: "Special",
 		name: "Hydro Typhoon",
 		pp: 1,
@@ -188,17 +189,6 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 				this.debug('removing Hydro Typhoon drawback before attack');
 				pokemon.removeVolatile('hydrotyphoon');
 			},
-		},
-		onTryMove(attacker, defender, move) {
-			if (attacker.removeVolatile(move.id)) {
-				return;
-			}
-			this.add('-prepare', attacker, move.name);
-			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
-				return;
-			}
-			attacker.addVolatile('twoturnmove', defender);
-			return null;
 		},
 		secondary: null,
 		target: "allAdjacentFoes",
@@ -315,7 +305,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	spinningflamecombo: {
 		num: -5008,
 		accuracy: 100,
-		basePower: 75,
+		basePower: 40,
 		category: "Physical",
 		name: "Spinning Flame Combo",
 		pp: 1,
