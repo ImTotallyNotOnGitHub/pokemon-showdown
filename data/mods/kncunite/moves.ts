@@ -42,8 +42,38 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Water"
 	},
-	coupdegrace: {
+	blissassistance: {
 		num: -5001,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Bliss Assistance",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 5,
+		flags: {
+			bypasssub: 1,
+			distance: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		volatileStatus: "helpinghand",
+		self:{
+			volatileStatus: "followme"
+		},
+		secondary: null,
+		target: "adjacentAlly",
+		type: "Normal"
+	},
+	coupdegrace: {
+		num: -5002,
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
@@ -75,7 +105,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Ghost"
 	},
 	fluffycreamsupreme: {
-		num: -5002,
+		num: -5003,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -118,8 +148,64 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "allies",
 		type: "Fairy"
 	},
+	hydrotyphoon: {
+		num: -5004,
+		accuracy: 100,
+		basePower: 160,
+		category: "Special",
+		name: "Hydro Typhoon",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		self: {
+			volatileStatus: 'hydrotyphoon',
+		},
+		condition: {
+			noCopy: true,
+			onStart(pokemon) {
+				this.add('-singlemove', pokemon, 'Hydro Typhoon', '[silent]');
+			},
+			onAccuracy() {
+				return true;
+			},
+			onSourceModifyDamage() {
+				return this.chainModify(0.5);
+			},
+			onBeforeMovePriority: 100,
+			onBeforeMove(pokemon) {
+				this.debug('removing Hydro Typhoon drawback before attack');
+				pokemon.removeVolatile('hydrotyphoon');
+			},
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Water",
+	},
 	midnightslash: {
-		num: -5003,
+		num: -5005,
 		accuracy: 100,
 		basePower: 25,
 		category: "Physical",
@@ -148,7 +234,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Dark"
 	},
 	psykaboom: {
-		num: -5004,
+		num: -5006,
 		accuracy: 100,
 		basePower: 250,
 		category: "Special",
@@ -157,6 +243,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		noPPBoosts: true,
 		priority: 0,
 		flags: {
+			charge: 1,
 			failcopycat: 1,
 			failmefirst: 1,
 			failmimic: 1,
@@ -166,7 +253,6 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			nosketch: 1,
 			nosleeptalk: 1,
 			protect: 1,
-			slicing: 1,
 			unite: 1
 		},
 		onTryMove(attacker, defender, move) {
@@ -183,6 +269,115 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Psychic"
+	},
+	revenantrend: {
+		num: -5007,
+		accuracy: 100,
+		basePower: 160,
+		category: "Physical",
+		name: "Revenant Rend",
+		pp: 1,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			slicing: 1,
+			unite: 1
+		},
+		breaksProtect: true,
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability: false,
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Ghost",
+	},
+	spinningflamecombo: {
+		num: -5008,
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		name: "Spinning Flame Combo",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			punch: 1,
+			protect: 1,
+			unite: 1
+		},
+		multihit: 2,
+		self: {
+			boosts: {
+				atk: 1,
+				spe: 1
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+	},
+	ultraswoleslam: {
+		num: -5009,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Ultra Swole Slam",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			punch: 1,
+			protect: 1,
+			unite: 1
+		},
+		multihit: 2,
+		onBasePower(basePower, pokemon, target) {
+			if (target.hp * 2 <= target.maxhp) {
+				return this.chainModify(2);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fighting",
 	},
 	bonechill: {
 		num: -8001,
