@@ -142,7 +142,6 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			unite: 1
 		},
 		multihit: 6,
-		smartTarget: true,
 		critRatio: 2,
 		secondary: null,
 		target: "normal",
