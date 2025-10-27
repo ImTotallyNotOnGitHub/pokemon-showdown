@@ -115,7 +115,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		desc: "Unite Move => Holder's Spe +1. Consumed after use."
 	},
 	rapidfirescarf: {
-		name: "Rapid Fire Scarf",
+		name: "Rapid-Fire Scarf",
 		spritenum: 360,
 		fling: {
 			basePower: 30,
