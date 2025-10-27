@@ -117,56 +117,57 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
         	}
     	},
 	},
-    rescuehood: {
-        num: -1007,
-        name: "Rescue Hood",
-        spritenum: 750,
-        fling: { basePower: 10 },
-        desc: "Boosts the amount of HP the holder restores to other Pokémon by 50%.",
+	rescuehood: {
+		num: -1007,
+		name: "Rescue Hood",
+		spritenum: 750,
+		fling: { basePower: 10 },
+		desc: "Boosts the amount of HP the holder restores to other Pokémon by 50% (does not affect self-healing).",
 
-        // Triggered whenever a Pokémon is about to be healed
-        onTryHeal(damage, target, source, effect) {
-            if (!source || source === target) return; // only boost healing to others
-            const holder = source;
-            if (holder.item === 'rescuehood') {
-                const boosted = this.modify(damage, 1.5); // +50% healing
-                this.add('-message', `${holder.name}'s Rescue Hood strengthened the healing!`);
-                return boosted;
-            }
-        },
-    },
-	resonantguard: {
-		name: "Resonant Guard",
-		spritenum: 307,
-		fling: { basePower: 90 },
-		num: -1008,
-		desc: "25% less damage from attacks for 2 turns after using a Physical move. Consumed after use.",
+		// Runs whenever any healing effect is attempted
+		onTryHeal(damage, target, source, effect) {
+			if (!source || source === target) return; // ignore self-healing
+			if (!source.hasItem('rescuehood')) return;
 
-		// Triggered when holder uses a Physical move
-		onAfterMove(pokemon, target, move) {
-			if (move.category === 'Physical') {
-				if (pokemon.useItem()) {
-					pokemon.addVolatile('resonantguardboost');
-				}
-			}
-		},
-		condition: {
-			duration: 2,
-			noCopy: true,
-			onStart(pokemon) {
-				this.add('-message', `${pokemon.name}'s Resonant Guard activated!`);
-			},
-			onSourceModifyDamage(damage, source, target, move) {
-				const effectData = (this as any).effectData;
-				if (target === effectData.target) {
-					return this.chainModify(0.75);
-				}
-			},
-			onEnd(pokemon) {
-				this.add('-message', `${pokemon.name}'s Resonant Guard wore off.`);
-			},
+			// Increase healing by 50%
+			const boosted = Math.floor(damage * 1.5);
+			this.add('-message', `${source.name}'s Rescue Hood strengthened the healing!`);
+			return boosted;
 		},
 	},
+    resonantguard: {
+        num: -1008,
+        name: "Resonant Guard",
+        spritenum: 307,
+        fling: { basePower: 90 },
+        desc: "25% less damage from attacks for 2 turns after using a Physical move. Consumed after use.",
+
+        // Trigger when the Pokémon uses a Physical move
+        onSourceAfterMove(source, target, move) {
+            if (move.category === 'Physical') {
+                if (source.useItem()) {
+                    // Add a volatile that stores the target safely
+                    source.addVolatile('resonantguardboost', { storedTarget: source });
+                    this.add('-message', `${source.name}'s Resonant Guard activated!`);
+                }
+            }
+        },
+
+        // Volatile effect to handle damage reduction
+        condition: {
+            duration: 2,
+            noCopy: true,
+            onSourceModifyDamage(damage, source, target, move) {
+                const storedTarget = this.effect.storedTarget;
+                if (storedTarget && target === storedTarget) {
+                    return this.chainModify(0.75); // reduce damage by 25%
+                }
+            },
+            onEnd(pokemon) {
+                this.add('-message', `${pokemon.name}'s Resonant Guard wore off.`);
+            },
+        },
+    },
 	// Modified Standard Items
 	bigrootunite: {
 		num: -1009,
@@ -239,23 +240,25 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		name: "Razor Claw (Unite)",
 		spritenum: 382,
 		desc: "Holder's critical hit ratio is raised by 1. After the holder uses a damaging move, the target's Speed is lowered by 1 stage if the move resulted in a critical hit.",
-		fling: {
-			basePower: 80,
-		},
+		fling: { basePower: 80 },
+
 		onModifyCritRatio(critRatio) {
 			return critRatio + 1;
 		},
-  		// Runs after this Pokémon uses a damaging move
-  		onAfterHit(target, source, move) {
-    		if (!target || target.fainted) return;
-    		if (move.category === 'Status') return;
-    		// This checks the crit flag from moveHitData (the battle already sets it)
-			const m = move as any;
-			if (m.crit) {
-    			this.add('-message', `${source.name}'s Razor Claw slowed ${target.name}!`);
-    			this.boost({ spe: -1 }, target, source, this.effect);
+
+		// Runs after this Pokémon uses a damaging move
+		onAfterHit(target, source, move) {
+			if (!target || target.fainted) return;
+			if (move.category === 'Status') return;
+
+			// Use official move hit data
+			const hitData = target.getMoveHitData(move);
+			if (hitData && hitData.crit) {
+				this.add('-message', `${source.name}'s Razor Claw slowed ${target.name}!`);
+				this.boost({ spe: -1 }, target, source, this.effect);
 			}
-  		},
+		},
+
 		gen: 9,
 	},
 	scopelensunite: {
