@@ -14,6 +14,17 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 		desc: "When the holder KOs a Pokemon, its Attack is raised by 1 stage.",
 	},
+	assualtvest: {
+		name: "Assault Vest",
+		onDamagePriority: 1,
+		onDamage(damage, target, source, effect) {
+			if (effect?.effectType === 'Move' && effect.category === 'Special') {
+				this.add('-enditem', target, 'Assault Vest');
+				target.useItem();
+				return 0;
+			}
+		},
+	},
 	drivelens: {
 		name: "Drive Lens",
 		spritenum: 359,

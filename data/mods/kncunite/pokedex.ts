@@ -1,12 +1,12 @@
 export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	absol: {
 		inherit: true,
-		baseStats: { hp: 65, atk: 155, def: 67, spa: 25, spd: 54, spe: 81 },
+		baseStats: { hp: 65, atk: 155, def: 67, spa: 25, spd: 54, spe: 96 },
 		abilities: { 0: "Super Luck" }
 	},
 	aegislash: {
 		inherit: true,
-		baseStats: { hp: 77, atk: 83, def: 160, spa: 24, spd: 141, spe: 107 },
+		baseStats: { hp: 77, atk: 83, def: 160, spa: 24, spd: 141, spe: 86 },
 	},
 	aegislashblade: {
 		inherit: true,
