@@ -3141,6 +3141,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Rusted Sword',
 			'Scope Lens (Unite)',
 			'Shell Bell (Unite)',
+			'Slick Spoon',
 			'Weakness Policy',
 			'Wise Glasses'
 		]

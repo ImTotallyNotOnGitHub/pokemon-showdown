@@ -122,23 +122,21 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		name: "Rescue Hood",
 		spritenum: 750,
 		fling: { basePower: 10 },
-		desc: "Boosts the amount of HP the holder restores to other Pokémon by 50% (does not affect self-healing).",
+		desc: "Increases the priority of the holder's next healing move. Consumed after use.",
 
 		// Hook whenever healing is applied
-		onTryHeal(damage, target, source, effect) {
-			// Ignore if there is no source, or healing self
-			if (!source || source === target) return;
-
-			// Only applies if the holder has Rescue Hood
-			if (!source.hasItem('rescuehood')) return;
-
-			// Boost the healing by 50%
-			const boosted = Math.floor(damage * 1.5);
-
-			// Add a message for feedback
-			this.add('-message', `${source.name}'s Rescue Hood strengthened the healing!`);
-			return boosted;
-		},
+        onModifyPriority(priority, pokemon, target, move) {
+            // Only apply if the move is a healing move
+            if (move.flags['heal']) {
+                return priority + 3;
+            }
+        },
+        onAfterMove(pokemon, target, move) {
+            // Consume the item after a healing move
+            if (move.flags['heal']) {
+                pokemon.useItem();
+            }
+        },
 	},
     resonantguard: {
         num: -1008,
@@ -148,11 +146,10 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
         desc: "25% less damage from attacks for 2 turns after using a Physical move. Consumed after use.",
 
         // Trigger when the Pokémon uses a Physical move
-        onSourceAfterMove(source, target, move) {
+		onSourceTryPrimaryHit(target, source, move) {
             if (move.category === 'Physical') {
                 	source.useItem();
-                    // Add a volatile that stores the target safely
-                    source.addVolatile('resonantguardboost', { storedTarget: source });
+                    source.addVolatile('resonantguardboost');
                     this.add('-message', `${source.name}'s Resonant Guard activated!`);
                 }
         },
@@ -161,8 +158,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
             duration: 2,
             noCopy: true,
             onSourceModifyDamage(damage, source, target, move) {
-                const storedTarget = this.effect.storedTarget;
-                if (storedTarget && target === storedTarget) {
+                if (target === source) {
                     return this.chainModify(0.75); // reduce damage by 25%
                 }
             },
@@ -171,6 +167,25 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
             },
         },
     },
+	slickspoon: {
+		num: -1015,
+		name: "Slick Spoon",
+		spritenum: 685,
+		desc: "Holder's Water-type moves have their power multiplied by 1.2.",
+		fling: {
+			basePower: 30,
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move) {
+			if (move.category === "Special") {
+				if (!move.secondaries) move.secondaries = [];
+				move.secondaries.push({
+					chance: 100,
+					boosts: {spd: -1},
+				});
+			}
+		},
+	},
 	// Modified Standard Items
 	bigrootunite: {
 		num: -1009,
@@ -250,18 +265,15 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 
 		// Runs after this Pokémon uses a damaging move
-		onAfterHit(target, source, move) {
-			if (!target || target.fainted) return;
-			if (move.category === 'Status') return;
-
-			// Use official move hit data
-			const hitData = target.getMoveHitData(move);
-			if (hitData && hitData.crit) {
-				this.add('-message', `${source.name}'s Razor Claw slowed ${target.name}!`);
-				this.boost({ spe: -1 }, target, source, this.effect);
+		onModifyMove(move) {
+			if (move.category === "Physical") {
+				if (!move.secondaries) move.secondaries = [];
+				move.secondaries.push({
+					chance: 100,
+					boosts: {spe: -1},
+				});
 			}
 		},
-
 		gen: 9,
 	},
 	scopelensunite: {
