@@ -3123,6 +3123,8 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Charizardite X',
 			'Choice Scarf',
 			'Choice Specs',
+			'Curse Bangle',
+			'Curse Incense',
 			'Drain Crown',
 			'Drive Lens',
 			'Energy Amplifier',
@@ -3142,6 +3144,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Scope Lens (Unite)',
 			'Shell Bell (Unite)',
 			'Slick Spoon',
+			'Tenacity Belt',
 			'Weakness Policy',
 			'Wise Glasses'
 		]

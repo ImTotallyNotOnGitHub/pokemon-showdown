@@ -55,6 +55,44 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
       		}
     	},
 	},
+	cursebangle: {
+		num: -1017,
+		name: "Curse Bangle",
+		spritenum: 361,
+		desc: "Holder's Physical moves inflict Curse on the target.",
+		fling: {
+			basePower: 50,
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move) {
+			if (move.category === "Physical") {
+				if (!move.secondaries) move.secondaries = [];
+				move.secondaries.push({
+					chance: 100,
+					volatileStatus: 'healblock',
+				});
+			}
+		},
+	},
+	curseincense: {
+		num: -1018,
+		name: "Curse Incense",
+		spritenum: 361,
+		desc: "Holder's Special moves inflict Curse on the target.",
+		fling: {
+			basePower: 50,
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move) {
+			if (move.category === "Special") {
+				if (!move.secondaries) move.secondaries = [];
+				move.secondaries.push({
+					chance: 100,
+					volatileStatus: 'healblock',
+				});
+			}
+		},
+	},
 	draincrown: {
 		num: -1003,
 		name: "Drain Crown",
@@ -183,6 +221,27 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 					chance: 100,
 					boosts: {spd: -1},
 				});
+			}
+		},
+	},
+	tenacitybelt: {
+		num: -1016,
+		name: "Tenacity Belt",
+		spritenum: 361,
+		desc: "If the holder is statused, its Defense and Special Defense are increased by 25%.",
+		fling: {
+			basePower: 50,
+		},
+		onModifyDefPriority: 5,
+		onModifyDef(def, pokemon) {
+			if (pokemon.status) {
+				return this.chainModify(1.25);
+			}
+		},
+		onModifySpDPriority: 5,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.status) {
+				return this.chainModify(1.25);
 			}
 		},
 	},
