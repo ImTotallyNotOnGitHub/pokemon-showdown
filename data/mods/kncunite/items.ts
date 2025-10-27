@@ -124,13 +124,18 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		fling: { basePower: 10 },
 		desc: "Boosts the amount of HP the holder restores to other Pokémon by 50% (does not affect self-healing).",
 
-		// Runs whenever any healing effect is attempted
+		// Hook whenever healing is applied
 		onTryHeal(damage, target, source, effect) {
-			if (!source || source === target) return; // ignore self-healing
+			// Ignore if there is no source, or healing self
+			if (!source || source === target) return;
+
+			// Only applies if the holder has Rescue Hood
 			if (!source.hasItem('rescuehood')) return;
 
-			// Increase healing by 50%
+			// Boost the healing by 50%
 			const boosted = Math.floor(damage * 1.5);
+
+			// Add a message for feedback
 			this.add('-message', `${source.name}'s Rescue Hood strengthened the healing!`);
 			return boosted;
 		},
@@ -145,14 +150,12 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
         // Trigger when the Pokémon uses a Physical move
         onSourceAfterMove(source, target, move) {
             if (move.category === 'Physical') {
-                if (source.useItem()) {
+                	source.useItem();
                     // Add a volatile that stores the target safely
                     source.addVolatile('resonantguardboost', { storedTarget: source });
                     this.add('-message', `${source.name}'s Resonant Guard activated!`);
                 }
-            }
         },
-
         // Volatile effect to handle damage reduction
         condition: {
             duration: 2,
