@@ -246,25 +246,6 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 	},
 	// Modified Standard Items
-	bigrootunite: {
-		num: -1009,
-		name: "Big Root (Unite)",
-		spritenum: 29,
-		desc: "Holder's HP recovery effects are increased by 20%.",
-		fling: {
-			basePower: 10,
-		},
-		onTryHealPriority: -1,
-    	onTryHeal(damage, target, source, effect) {
-      	// This hook modifies all healing effects
-      		const boosted = Math.floor(damage * 6 / 5); // +20%
-      		if (boosted !== damage) {
-        		this.add('-message', `${target.name}'s Big Root increased its recovery!`);
-      		}
-      		return boosted;
-    	},
-		gen: 9,
-	},
 	floatstoneunite: {
 		num: -1010,
 		name: "Float Stone (Unite)",

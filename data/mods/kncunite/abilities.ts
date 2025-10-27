@@ -1,4 +1,24 @@
 export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTable = {
+	blaze: {
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Fire') {
+				this.debug('Blaze boost');
+				return this.chainModify(1.1);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Fire') {
+				this.debug('Blaze boost');
+				return this.chainModify(1.1);
+			}
+		},
+		flags: {},
+		name: "Blaze",
+		rating: 2,
+		num: 66,
+	},
 	stancechange: {
 		onModifyMovePriority: 1,
 		onModifyMove(move, attacker, defender) {

@@ -3117,7 +3117,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			// Items Allowed
 			'Accel Bracer',
 			'Assault Vest',
-			'Big Root (Unite)',
+			'Big Root',
 			'Buddy Barrier',
 			'Charging Charm',
 			'Charizardite X',
