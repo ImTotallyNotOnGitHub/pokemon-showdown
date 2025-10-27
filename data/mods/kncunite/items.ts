@@ -28,6 +28,19 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		},
 		desc: "When the holder KOs a Pokemon, its Sp. Atk is raised by 1 stage.",
 	},
+	energyamplifier: {
+		name: "Energy Amplifier",
+		spritenum: 307,
+		onSourceTryPrimaryHit(target, source, move) {
+			if (move.flags['unite']) {
+				source.useItem()
+			}
+		},
+		boosts: {
+			spe: 1
+		},
+		desc: "When the holder uses a unite move, its Speed is raised by 1 stage. Consumed after use."
+	},
 	// Legacy Items
 	lucarionite: {
 		inherit: true,
