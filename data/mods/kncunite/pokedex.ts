@@ -64,7 +64,7 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 	},
 	charizardmegax: {
 		inherit: true,
-		baseStats: { hp: 81, atk: 153, def: 120, spa: 45, spd: 87, spe: 74 },
+		baseStats: { hp: 81, atk: 153, def: 122, spa: 45, spd: 87, spe: 74 },
 		abilities: { 0: "Tough Claws" }
 	},
 	cinderace: {

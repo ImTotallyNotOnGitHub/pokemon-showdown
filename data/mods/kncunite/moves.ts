@@ -137,12 +137,13 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Ghost"
 	},
 	floweryfieldsforever: {
-		num: 392,
+		num: -5017,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
 		name: "Flowery Fields Forever",
-		pp: 20,
+		pp: 1,
+		noPPBoosts: true,
 		priority: 0,
 		flags: { failcopycat: 1,
 			failmefirst: 1,
@@ -156,6 +157,10 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			unite: 1
 		},
 		volatileStatus: 'floweringfield',
+		onHit(target, source, move) {
+			source.addVolatile('floweringfield');
+			this.add('-activate', source, 'move: Flowery Fields Forever');
+		},
 		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Flowery Fields Forever');
@@ -248,6 +253,30 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "normal",
 		type: "Water"
+	},
+	healpulse: {
+		num: 505,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Heal Pulse",
+		pp: 10,
+		priority: 0,
+		flags: { protect: 1, reflectable: 1, distance: 1, heal: 1, allyanim: 1, metronome: 1, pulse: 1 },
+        onHit(target, source) {
+            const userSpA = source.getStat('spa');
+            // Heal amount is 33% of the user's SpA
+            const healAmount = Math.floor(userSpA / 3);
+            const healed = this.heal(healAmount, target, source);
+            if (!healed) {
+                this.add('-message', `${target.name} could not be healed!`);
+                return false;
+            }
+            this.add('-message', `${target.name} regained health from ${source.name}'s Heal Pulse!`);
+        },
+		secondary: null,
+		target: "any",
+		type: "Psychic",
 	},
 	hydrotyphoon: {
 		num: -5004,
@@ -585,7 +614,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	ultraswoleslam: {
 		num: -5009,
-		accuracy: 95,
+		accuracy: 100,
 		basePower: 75,
 		category: "Physical",
 		name: "Ultra Swole Slam",
@@ -665,7 +694,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	worstnightmare: {
 		num: -5016,
 		accuracy: 100,
-		basePower: 120,
+		basePower: 0,
 		category: "Status",
 		name: "Worst Nightmare",
 		pp: 1,
@@ -691,10 +720,10 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
             duration: 3,
             onStart(pokemon, source) {
                 this.effectState.partner = source;
-                this.add('-start', pokemon, 'Worst Nightmare');
+                this.add('-start', pokemon, 'Duel Zone');
             },
-            
-            // Prevent switching or fleeing
+
+            // Trap both combatants
             onTrapPokemon(pokemon) {
                 const partner = this.effectState.partner;
                 if (partner && partner.isActive && !partner.fainted) {
@@ -704,42 +733,53 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
             onDragOut(pokemon) {
                 const partner = this.effectState.partner;
                 if (partner && partner.isActive && !partner.fainted) {
-                    this.add('-message', `${pokemon.name} cannot be dragged out while locked in a nightmare!`);
+                    this.add('-message', `${pokemon.name} cannot be dragged out while dueling!`);
                     return false;
                 }
             },
-            
-            // Make each invulnerable to other Pokémon
+
+            // ❌ Prevent selecting or hitting non-partner targets
+            onTryMove(source, target, move) {
+                const partner = this.effectState.partner;
+                if (!partner?.isActive || partner.fainted) return;
+
+                // Moves that target allies or the field are blocked unless it's the partner
+                if (move.target === 'all' || move.target === 'ally' || move.target === 'foeSide' || move.target === 'allySide') {
+                    this.add('-message', `${source.name} can only focus on its Duel opponent!`);
+                    return false;
+                }
+
+                // If the move is targeting someone other than the partner
+                if (target && target !== partner) {
+                    this.add('-message', `${source.name} is locked in a Duel and can only target ${partner.name}!`);
+                    return false;
+                }
+            },
+
+            // Make them immune to other Pokémon’s attacks
             onTryHitPriority: 99,
             onTryHit(target, source, move) {
                 const partner = this.effectState.partner;
-                if (!partner || source === partner) return; // allow partner attacks
-                this.add('-message', `${target.name} ignores attacks from others while locked in a nightmare!`);
+                if (source === partner) return;
+                this.add('-message', `${target.name} ignores ${source.name}'s attack while dueling!`);
                 return false;
             },
-            
-            // Force targeting the duel partner
-            onModifyTarget(target, source, move, targetList) {
-                const partner = this.effectState.partner;
-                if (partner && partner.isActive && !partner.fainted && target !== partner) {
-                    return partner;
-                }
-            },
-            
+
+            // Break the Duel if one faints
             onFaint(pokemon) {
                 const partner = this.effectState.partner;
                 if (partner?.volatiles['duelzone']) {
                     partner.removeVolatile('duelzone');
-                    this.add('-message', `${partner.name} is freed from the Nightmare!`);
+                    this.add('-message', `${partner.name} is freed from the Duel Zone!`);
                 }
             },
-            
+
             onEnd(pokemon) {
-                this.add('-end', pokemon, 'Nightmare');
+                this.add('-end', pokemon, 'Duel Zone');
             },
         },
 		secondary: null,
-		target: "normal",
+		target: "adjacentFoe",
 		type: "Dark",
 	},
 	bonechill: {

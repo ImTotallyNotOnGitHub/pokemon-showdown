@@ -3044,6 +3044,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Ceruledge',
 			'Chandelure',
 			'Charizard',
+			'Charizard-Mega-X',
 			'Cinderace',
 			'Clefable',
 			'Comfey',
