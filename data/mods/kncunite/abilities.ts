@@ -19,10 +19,23 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		rating: 2,
 		num: 66,
 	},
+	longreach: {
+		onModifyMove(move) {
+			delete move.flags['contact'];
+			if (move.target !== 'allAdjacentFoes' && move.target !== 'allAdjacent') {
+				move.target = 'any';
+				move.flags['distance'] = 1;
+			}
+		},
+		flags: {},
+		name: "Long Reach",
+		rating: 1,
+		num: 203,
+	},
 	runaway: {
 		onModifySpePriority: 5,
 		onModifySpe(spe, pokemon) {
-			if (pokemon.hp === pokemon.maxhp) {
+			if (pokemon.hp <= pokemon.maxhp / 2) {
 				return this.chainModify(1.2);
 			}
 		},

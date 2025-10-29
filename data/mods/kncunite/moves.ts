@@ -70,7 +70,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			}
 		},
 		secondary: null,
-		target: "normal",
+		target: "any",
 		type: "Fire"
 	},
 	blissassistance: {
@@ -84,7 +84,6 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		priority: 5,
 		flags: {
 			bypasssub: 1,
-			distance: 1,
 			failcopycat: 1,
 			failmefirst: 1,
 			failmimic: 1,
@@ -124,29 +123,27 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			protect: 1,
 			unite: 1
 		},
-		onTryHit(target, source, move) {
-			if (source.isAlly(target)) {
-				move.basePower = 0;
-				move.infiltrates = true;
-			}
-		},
+		// Damages opposing Pokémon normally
 		onTryMove(source, target, move) {
-			if (source.isAlly(target) && source.volatiles['healblock']) {
+			// Check for Heal Block before attempting to heal later
+			if (source.volatiles['healblock']) {
 				this.attrLastMove('[still]');
 				this.add('cant', source, 'move: Heal Block', move);
 				return false;
 			}
 		},
-		onHit(target, source, move) {
-			if (source.isAlly(target)) {
-				if (!this.heal(Math.floor(source.getStat('spa') * 0.25))) {
-					return this.NOT_FAIL;
+		// After the damaging part, heal allies based on user's SpA
+		onHitField(source, move) {
+			for (const ally of source.side.allies()) {
+				if (ally && ally !== source && !ally.fainted) {
+					const healAmount = Math.floor(source.getStat('spa') * 0.25);
+					this.heal(healAmount, ally, source);
 				}
 			}
 		},
 		secondary: null,
-		target: "all",
-		type: "Grass"
+		target: "allAdjacent", // hits all adjacent opponents only
+		type: "Grass",
 	},
 	coupdegrace: {
 		num: -5002,
@@ -253,7 +250,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		multihit: 2,
 		smartTarget: true,
 		secondary: null,
-		target: "normal",
+		target: "any",
 		type: "Dragon"
 	},
 	dustdevilformation: {
@@ -345,13 +342,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			unite: 1
 		},
 		volatileStatus: 'floweringfield',
-		onHit(target, source, move) {
-			source.addVolatile('floweringfield');
-			this.add('-activate', source, 'move: Flowery Fields Forever');
-		},
 		condition: {
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Flowery Fields Forever');
+				this.add('-start', pokemon, 'floweringfield');
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {
@@ -439,7 +432,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			}
 		},
 		secondary: null,
-		target: "normal",
+		target: "any",
 		type: "Water"
 	},
 	healpulse: {
@@ -1114,6 +1107,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			protect: 1,
 			unite: 1
 		},
+		volatileStatus: 'worstnightmare',
 		onHit(target, source) {
 			source.addVolatile('worstnightmare');
 			target.addVolatile('worstnightmare');
@@ -1123,7 +1117,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
             duration: 3,
             onStart(pokemon, source) {
                 this.effectState.partner = source;
-                this.add('-start', pokemon, 'Duel Zone');
+                this.add('-start', pokemon, 'Worst Nightmare');
             },
 
             // Trap both combatants
@@ -1136,7 +1130,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
             onDragOut(pokemon) {
                 const partner = this.effectState.partner;
                 if (partner && partner.isActive && !partner.fainted) {
-                    this.add('-message', `${pokemon.name} cannot be dragged out while dueling!`);
+                    this.add('-message', `${pokemon.name} cannot be dragged out of the nightmare!`);
                     return false;
                 }
             },
@@ -1147,14 +1141,14 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
                 if (!partner?.isActive || partner.fainted) return;
 
                 // Moves that target allies or the field are blocked unless it's the partner
-                if (move.target === 'all' || move.target === 'ally' || move.target === 'foeSide' || move.target === 'allySide') {
-                    this.add('-message', `${source.name} can only focus on its Duel opponent!`);
+                if (move.target === 'all' || move.target === 'allies' || move.target === 'adjacentAlly' || move.target === 'foeSide' || move.target === 'allySide') {
+                    this.add('-message', `${source.name} can only focus on its fear!`);
                     return false;
                 }
 
                 // If the move is targeting someone other than the partner
                 if (target && target !== partner) {
-                    this.add('-message', `${source.name} is locked in a Duel and can only target ${partner.name}!`);
+                    this.add('-message', `${source.name} is locked in a nightmare and can only target ${partner.name}!`);
                     return false;
                 }
             },
@@ -1164,21 +1158,21 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
             onTryHit(target, source, move) {
                 const partner = this.effectState.partner;
                 if (source === partner) return;
-                this.add('-message', `${target.name} ignores ${source.name}'s attack while dueling!`);
+                this.add('-message', `${target.name} ignores ${source.name}'s attack while in the nightmare!`);
                 return false;
             },
 
             // Break the Duel if one faints
             onFaint(pokemon) {
                 const partner = this.effectState.partner;
-                if (partner?.volatiles['duelzone']) {
-                    partner.removeVolatile('duelzone');
-                    this.add('-message', `${partner.name} is freed from the Duel Zone!`);
+                if (partner?.volatiles['worstnightmare']) {
+                    partner.removeVolatile('worstnightmare');
+                    this.add('-message', `${partner.name} is freed from the Nightmare!`);
                 }
             },
 
             onEnd(pokemon) {
-                this.add('-end', pokemon, 'Duel Zone');
+                this.add('-end', pokemon, 'Worst Nightmare');
             },
         },
 		secondary: null,
