@@ -19,6 +19,18 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		rating: 2,
 		num: 66,
 	},
+	runaway: {
+		onModifySpePriority: 5,
+		onModifySpe(spe, pokemon) {
+			if (pokemon.hp === pokemon.maxhp) {
+				return this.chainModify(1.2);
+			}
+		},
+		flags: {},
+		name: "Run Away",
+		rating: 0,
+		num: 50,
+	},
 	stancechange: {
 		onModifyMovePriority: 1,
 		onModifyMove(move, attacker, defender) {
@@ -48,5 +60,25 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 		name: "Stance Change",
 		rating: 4,
 		num: 176,
+	},
+	torrent: {
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				this.debug('Torrent boost');
+				return this.chainModify(1.1);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				this.debug('Torent boost');
+				return this.chainModify(1.1);
+			}
+		},
+		flags: {},
+		name: "Torrent",
+		rating: 2,
+		num: 67,
 	},
 }
