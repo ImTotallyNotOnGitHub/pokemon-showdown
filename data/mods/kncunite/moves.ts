@@ -1,4 +1,44 @@
 export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
+	azurespyvision: {
+		num: -5034,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Azure Spy Vision",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			unite: 1
+		},
+		volatileStatus: "azurespyvision",
+		condition: {
+			noCopy: true,
+			duration: 3,
+			onModifyCritRatio(critRatio) {
+				return critRatio + 1;
+			},
+			onModifyDamage(damage, source, target, move) {
+				if (target.getMoveHitData(move).crit) {
+					this.debug('Azure Spy Vision boost');
+					return this.chainModify(1.5);
+				}
+			},
+		},
+		boosts: {
+			spe: 1
+		},
+		secondary: null,
+		target: "self",
+		type: "Water"
+	},
 	bellybash: {
 		num: -5000,
 		accuracy: 100,
@@ -41,6 +81,45 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "normal",
 		type: "Water"
+	},
+	berrybellyflop: {
+		num: -5030,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Berry Belly Flop",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		onTryMove(attacker, defender, move) {
+			this.heal(attacker.maxhp / 2);
+			if (attacker.getItem().isBerry) {
+				attacker.eatItem();
+			}
+		},
+		onAfterMoveSecondarySelf(source, target, move) {
+			// Only grant the Sitrus Berry if the user is not holding an item
+			if (!source.item) {
+				const sitrus = this.dex.items.get('sitrusberry');
+				source.setItem(sitrus);
+				this.add('-item', source, sitrus, '[from] move: Berry Belly Flop');
+			}
+		},
+		target: "normal",
+		type: "Normal"
 	},
 	blazingbicyclekick: {
 		num: -5012,
@@ -136,8 +215,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		onHitField(source, move) {
 			for (const ally of source.side.allies()) {
 				if (ally && ally !== source && !ally.fainted) {
-					const healAmount = Math.floor(source.getStat('spa') * 0.25);
-					this.heal(healAmount, ally, source);
+            		const userSpA = source.getStat('spa');
+					const healAmount = Math.floor(userSpA / 4);
+					const healed = this.heal(healAmount, ally, source);
 				}
 			}
 		},
@@ -220,6 +300,56 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Dragon",
 	},
+	dragoncurrent: {
+		num: -5027,
+		accuracy: 100,
+		basePower: 100,
+		category: "Physical",
+		name: "Dragon Current",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			unite: 1
+		},
+		self: {
+			boosts: {
+				spe: 1
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability: false,
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "normal",
+		type: "Water",
+	},
 	dreepanddestroy: {
 		num: -5020,
 		accuracy: 100,
@@ -254,7 +384,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Dragon"
 	},
 	dustdevilformation: {
-		num: -5024,
+		num: -5025,
 		accuracy: 100,
 		basePower: 60,
 		category: "Physical",
@@ -285,6 +415,31 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
+	},
+	fairysingularity: {
+		num: -5026,
+		accuracy: 100,
+		basePower: 120,
+		category: "Special",
+		name: "Fairy Singularity",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Fairy"
 	},
 	fancifulfireworks: {
 		num: -5018,
@@ -434,6 +589,43 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "any",
 		type: "Water"
+	},
+	glacialstage: {
+		num: -5028,
+		accuracy: 100,
+		basePower: 20,
+		category: "Special",
+		name: "Glacial Stage",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			unite: 1
+		},
+		self: {
+			boosts: {
+				spe: 1
+			},
+			onHit(source) {
+				this.field.setWeather('snowscape');
+			},
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Ice",
 	},
 	healpulse: {
 		num: 505,
@@ -626,10 +818,60 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Grass"
 	},
-	psychicsolare: {
-		num: -5023,
+	phantomambush: {
+		num: -5027,
 		accuracy: 100,
-		basePower: 40,
+		basePower: 100,
+		category: "Special",
+		name: "Phantom Ambush",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			unite: 1
+		},
+		self: {
+			boosts: {
+				spe: 1
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability: false,
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "normal",
+		type: "Ghost",
+	},
+	psychicsolare: {
+		num: -5024,
+		accuracy: 100,
+		basePower: 20,
 		category: "Special",
 		name: "Psychic Solare",
 		pp: 1,
@@ -646,6 +888,11 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			nosleeptalk: 1,
 			protect: 1,
 			unite: 1
+		},
+		self: {
+			onHit(source) {
+				this.field.setTerrain('psychicterrain');
+			},
 		},
 		secondary: {
 			chance: 100,
@@ -690,6 +937,44 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic"
+	},
+	rekindlingdlame: {
+		num: -5032,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Rekindling Flame",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			heal: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			unite: 1
+		},
+		onTryHit(source) {
+			if (!source.side.pokemon.filter(ally => ally.fainted).length) {
+				return false;
+			}
+		},
+		slotCondition: 'revivalblessing',
+		// No this not a real switchout move
+		// This is needed to trigger a switch protocol to choose a fainted party member
+		// Feel free to refactor
+		selfSwitch: true,
+		condition: {
+			duration: 1,
+			// reviving implemented in side.ts, kind of
+		},
+		secondary: null,
+		target: "self",
+		type: "Normal",
 	},
 	revenantrend: {
 		num: -5007,
@@ -782,6 +1067,108 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Dragon",
 	},
+	rightasrain: {
+		num: -5029,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Right As Rain",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			snatch: 1,
+			unite: 1
+		},
+		self: {
+			volatileStatus: 'rubblerouser',
+		},
+		condition: {
+			duration: 4,
+			noCopy: true,
+			onStart(pokemon) {
+				this.add('-singlemove', pokemon, 'Right As Rain', '[silent]');
+			},
+			onResidualOrder: 1,
+			onResidualSubOrder: 1,
+			onResidual(pokemon) {
+				const healAmount = Math.floor(pokemon.baseMaxhp / 4);
+				this.heal(healAmount, pokemon, pokemon);
+				this.add('-message', `${pokemon.name} is regaining health!`);
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Right As Rain');
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Dragon",
+	},
+	ringsunbound: {
+		num: -5033,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Rings Unbound",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			unite: 1
+		},
+		boosts: {
+			atk: 1,
+			spa: 1,
+			spe: 1
+		},
+		onHit(move, attacker, defender) {
+			if (attacker.species.baseSpecies !== 'Hoopa' || attacker.transformed) return;
+			if (attacker.species.name !== 'Hoopa-Unbound') {
+				attacker.formeChange('Hoopa-Unbound');
+			};
+			let replaced = false;
+			for (let i = 0; i < attacker.moveSlots.length; i++) {
+				const moveSlot = attacker.moveSlots[i];
+				if (moveSlot.id === 'hyperspacehole') {
+					const newMove = this.dex.moves.get('hyperspacefury');
+
+					moveSlot.move = newMove.name;
+					moveSlot.id = newMove.id;
+					moveSlot.pp = newMove.pp;
+					moveSlot.maxpp = newMove.pp;
+					moveSlot.disabled = false;
+
+					// Update baseMoveSlots so the change persists
+					attacker.baseMoveSlots[i] = Object.assign({}, moveSlot);
+
+					this.add('-message', `${attacker.name}'s Hyperspace Hole transformed into Hyperspace Fury!`);
+					replaced = true;
+					break;
+				}
+			}
+			if (!replaced) {
+				this.add('-fail', attacker, 'move: Rings Unbound');
+				return this.NOT_FAIL;
+			}
+		},
+		secondary: null,
+		target: "self",
+		type: "Psychic"
+	},
 	rubblerouser: {
 		num: -5015,
 		accuracy: 100,
@@ -860,10 +1247,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			},
 			onModifyMovePriority: 100,
 			onModifyMove(move) {
-				if(move.category !== 'Status') {
-					move.overrideOffensiveStat = 'atk';
 					move.drain = [1, 2];
-				}
 			},
 			onEnd(pokemon) {
 				this.add('-end', pokemon, 'Seismic Slam');
@@ -1041,6 +1425,38 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Fighting",
 	},
+	waterburstshuriken: {
+		num: -5031,
+		accuracy: 100,
+		basePower: 100,
+		category: "Physical",
+		name: "Waterburst Shuriken",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			distance: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		secondary: {
+			boosts: {
+				spe: -1
+			}
+		},
+		selfSwitch: true,
+		target: "any",
+		type: "Water"
+	},
 	wonderwish: {
 		num: -50013,
 		accuracy: true,
@@ -1105,6 +1521,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			nosketch: 1,
 			nosleeptalk: 1,
 			protect: 1,
+			reflectable: 1,
 			unite: 1
 		},
 		volatileStatus: 'worstnightmare',
@@ -1146,8 +1563,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
                     return false;
                 }
 
-                // If the move is targeting someone other than the partner
-                if (target && target !== partner) {
+                // If the move is targeting someone other than the partner or source itself, block it
+                if (target && target !== partner || target !== source) {
                     this.add('-message', `${source.name} is locked in a nightmare and can only target ${partner.name}!`);
                     return false;
                 }

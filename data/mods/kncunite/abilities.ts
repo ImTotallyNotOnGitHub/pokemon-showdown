@@ -14,6 +14,13 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 				return this.chainModify(1.1);
 			}
 		},
+		onModifyMove(move, pokemon) {
+			if(move.type === 'Fire' && move.category !== 'Status' && pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) {
+				move.overrideOffensiveStat = 'atk';
+			} else {
+				move.overrideOffensiveStat = 'spa';
+			}
+		},
 		flags: {},
 		name: "Blaze",
 		rating: 2,
@@ -22,9 +29,8 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 	longreach: {
 		onModifyMove(move) {
 			delete move.flags['contact'];
-			if (move.target !== 'allAdjacentFoes' && move.target !== 'allAdjacent') {
+			if (move.target === 'normal' || move.target === 'adjacentFoe') {
 				move.target = 'any';
-				move.flags['distance'] = 1;
 			}
 		},
 		flags: {},
@@ -87,6 +93,13 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			if (move.type === 'Water') {
 				this.debug('Torent boost');
 				return this.chainModify(1.1);
+			}
+		},
+		onModifyMove(move, pokemon) {
+			if(move.type === 'Water' && move.category !== 'Status' && pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) {
+				move.overrideOffensiveStat = 'atk';
+			} else {
+				move.overrideOffensiveStat = 'spa';
 			}
 		},
 		flags: {},
