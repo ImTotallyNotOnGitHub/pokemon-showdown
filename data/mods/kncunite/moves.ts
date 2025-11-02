@@ -22,6 +22,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		condition: {
 			noCopy: true,
 			duration: 3,
+			onStart(pokemon) {
+				this.add('-singlemove', pokemon, 'Azure Spy Vision', '[silent]');
+			},
 			onModifyCritRatio(critRatio) {
 				return critRatio + 1;
 			},
@@ -31,6 +34,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 					return this.chainModify(1.5);
 				}
 			},
+            onEnd(pokemon) {
+                this.add('-end', pokemon, 'Azure Spy Vision');
+            },
 		},
 		boosts: {
 			spe: 1
@@ -38,6 +44,59 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "self",
 		type: "Water"
+	},
+	auracannon: {
+		num: -5039,
+		accuracy: true,
+		basePower: 160,
+		category: "Special",
+		name: "Aura Cannon",
+		pp: 20,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, distance: 1, metronome: 1, bullet: 1, pulse: 1 },
+		secondary: null,
+		target: "any",
+		type: "Fighting",
+	},
+	barrageblow: {
+		num: -5040,
+		accuracy: 100,
+		basePower: 20,
+		category: "Physical",
+		name: "Barrage Blow",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			charge: 1,
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		multihit: 5,
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			this.boost({ atk: 1, def: 1, spd: 1, spe: 1 }, attacker, attacker, move);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fighting"
 	},
 	bellybash: {
 		num: -5000,
@@ -180,6 +239,38 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "adjacentAlly",
 		type: "Normal"
+	},
+	computeandcrash: {
+		num: -5043,
+		accuracy: 100,
+		basePower: 100,
+		category: "Physical",
+		name: "Compute and Crash",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			distance: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (target.hp < target.maxhp) {
+				return this.chainModify(2);
+			}
+		},
+		secondary: null,
+		target: "any",
+		type: "Steel"
 	},
 	cottoncloudcrash: {
 		num: -5022,
@@ -416,6 +507,79 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Fighting",
 	},
+	emeraldtwostep: {
+		num: -5038,
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		name: "Emerald Two-Step",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			contact: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			slicing: 1,
+			unite: 1
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability: false,
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Grass",
+	},
+	eonblast: {
+		num: -5037,
+		accuracy: 100,
+		basePower: 110,
+		basePowerCallback(target, source, move) {
+			if (['eonblast'].includes(move.sourceEffect)) {
+				this.add('-combine');
+				return 250;
+			}
+			return move.basePower;
+		},
+		category: "Special",
+		name: "Eon Blast",
+		pp: 10,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dragon",
+	},
 	fairysingularity: {
 		num: -5026,
 		accuracy: 100,
@@ -476,6 +640,48 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Fire"
 	},
+	floralflourish: {
+		num: -5042,
+		accuracy: 100,
+		basePower: 30,
+		category: "Special",
+		name: "Floral Flourish",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			charge: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		multihit: 3,
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability: false,
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Grass"
+	},
 	floweryfieldsforever: {
 		num: -5017,
 		accuracy: true,
@@ -496,15 +702,23 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			metronome: 1,
 			unite: 1
 		},
-		volatileStatus: 'floweringfield',
+		volatileStatus: 'floweringfieldsforever',
+		onHit(target, source, move) {
+			target.addVolatile('floweringfieldsforever');
+		},
 		condition: {
+			noCopy: true,
+			duration: 8,
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'floweringfield');
+				this.add('-start', pokemon, 'Flowering Fields Forever');
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {
-				this.heal(pokemon.baseMaxhp / 10);
+				this.heal(pokemon.baseMaxhp / 8);
 			},
+            onEnd(pokemon) {
+                this.add('-end', pokemon, 'Flowering Fields Forever');
+            },
 		},
 		secondary: null,
 		target: "allies",
@@ -733,6 +947,57 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Ghost"
 	},
+	laprasexpress: {
+		num: -5035,
+		accuracy: true,
+		basePower: 60,
+		category: "Special",
+		name: "Lapras Express",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			bypasssub: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		sideCondition: 'laprasexpress',
+		condition: {
+			duration: 4,
+			durationCallback(target, source, effect) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-activate', source, 'ability: Persistent', '[move] Lapras Express');
+					return 6;
+				}
+				return 4;
+			},
+			onSideStart(side, source) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-sidestart', side, 'move: Lapras Express', '[persistent]');
+				} else {
+					this.add('-sidestart', side, 'move: Lapras Express');
+				}
+			},
+			onModifySpe(spe, pokemon) {
+				return this.chainModify(2);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 5,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Lapras Express');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Water"
+	},
 	lividoutrage: {
 		num: -5025,
 		accuracy: 100,
@@ -762,6 +1027,37 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Dragon"
 	},
+	mammothmash: {
+		num: -5041,
+		accuracy: 100,
+		basePower: 15,
+		category: "Physical",
+		name: "Mammoth Mash",
+		pp: 1,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		multihit: 4,
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Ground",
+	},
 	midnightslash: {
 		num: -5005,
 		accuracy: 100,
@@ -790,6 +1086,71 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		secondary: null,
 		target: "normal",
 		type: "Dark"
+	},
+	mistblast: {
+		num: -5036,
+		accuracy: 100,
+		basePower: 110,
+		basePowerCallback(target, source, move) {
+			if (['eonblast'].includes(move.sourceEffect)) {
+				this.add('-combine');
+				return 250;
+			}
+			return move.basePower;
+		},
+		category: "Special",
+		name: "Mist Blast",
+		pp: 10,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		secondary: null,
+		target: "normal",
+		type: "Psychic",
+	},
+	mysticalmirage: {
+		num: -5044,
+		accuracy: true,
+		basePower: 0,
+		name: "Mystical Mirage",
+		category: "Status",
+		pp: 1,
+		priority: 0,
+		flags: {
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			unite: 1
+		},
+		onTryMove(attacker, defender, move) {
+			this.add('-anim', attacker, 'Protect', attacker);
+		},
+		onHit(pokemon) {
+			pokemon.addVolatile('phantomveil');
+			const ally = pokemon.side.active.find(
+				p => p && p !== pokemon && !p.fainted
+			);
+			if (ally) ally.addVolatile('phantomveil');
+			this.add('-message', `${pokemon.name} and its ally became untouchable!`);
+		},
+		secondary: null,
+		target: "self",
+		type: "Psychic"
 	},
 	nocknock: {
 		num: -5013,
@@ -837,6 +1198,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			noassist: 1,
 			nosketch: 1,
 			nosleeptalk: 1,
+			protect: 1,
 			unite: 1
 		},
 		self: {
@@ -938,7 +1300,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		target: "normal",
 		type: "Psychic"
 	},
-	rekindlingdlame: {
+	rekindlingflame: {
 		num: -5032,
 		accuracy: true,
 		basePower: 0,
@@ -1088,7 +1450,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			unite: 1
 		},
 		self: {
-			volatileStatus: 'rubblerouser',
+			volatileStatus: 'rightasrain',
 		},
 		condition: {
 			duration: 4,
@@ -1587,7 +1949,6 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
                     this.add('-message', `${partner.name} is freed from the Nightmare!`);
                 }
             },
-
             onEnd(pokemon) {
                 this.add('-end', pokemon, 'Worst Nightmare');
             },
