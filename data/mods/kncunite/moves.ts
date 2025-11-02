@@ -1148,6 +1148,27 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			if (ally) ally.addVolatile('phantomveil');
 			this.add('-message', `${pokemon.name} and its ally became untouchable!`);
 		},
+		condition: {
+			noCopy: true, // don’t pass via Baton Pass etc.
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Phantom Veil');
+			},
+			onAccuracy(accuracy, target, source, move) {
+				// Any move targeting this Pokémon misses
+				if (target.volatiles['phantomveil']) {
+					this.add('-message', `${target.name} is protected by a veil!`);
+					return false;
+				}
+			},
+			onBeforeMovePriority: 100,
+			onBeforeMove(pokemon) {
+				// Remove the veil before the Pokémon’s next action
+				pokemon.removeVolatile('phantomveil');
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Phantom Veil');
+			},
+		},
 		secondary: null,
 		target: "self",
 		type: "Psychic"
