@@ -51,9 +51,23 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		basePower: 160,
 		category: "Special",
 		name: "Aura Cannon",
-		pp: 20,
+		pp: 1,
+		noPPBoosts: true,
 		priority: 0,
-		flags: { protect: 1, mirror: 1, distance: 1, metronome: 1, bullet: 1, pulse: 1 },
+		flags: {
+			distance: 1,
+			failcopycat: 1,
+			failmefirst: 1,
+			failmimic: 1,
+			failinstruct: 1,
+			mirror: 1,
+			noassist: 1,
+			nosketch: 1,
+			nosleeptalk: 1,
+			protect: 1,
+			pulse: 1,
+			unite: 1
+		},
 		secondary: null,
 		target: "any",
 		type: "Fighting",
@@ -313,7 +327,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			}
 		},
 		secondary: null,
-		target: "allAdjacent", // hits all adjacent opponents only
+		target: "allAdjacentFoes", // hits all adjacent opponents only
 		type: "Grass",
 	},
 	coupdegrace: {
@@ -562,7 +576,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		},
 		category: "Special",
 		name: "Eon Blast",
-		pp: 10,
+		pp: 1,
+		noPPBoosts: true,
 		priority: 0,
 		flags: {
 			failcopycat: 1,
@@ -1104,7 +1119,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	mistblast: {
 		num: -5036,
 		accuracy: 100,
-		basePower: 110,
+		basePower: 100,
 		basePowerCallback(target, source, move) {
 			if (['eonblast'].includes(move.sourceEffect)) {
 				this.add('-combine');
@@ -1114,7 +1129,8 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		},
 		category: "Special",
 		name: "Mist Blast",
-		pp: 10,
+		pp: 1,
+		noPPBoosts: true,
 		priority: 0,
 		flags: {
 			failcopycat: 1,
