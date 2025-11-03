@@ -576,6 +576,21 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			protect: 1,
 			unite: 1
 		},
+		onPrepareHit(target, source, move) {
+			for (const action of this.queue.list as MoveAction[]) {
+				if (
+					!action.move || !action.pokemon?.isActive ||
+					action.pokemon.fainted || action.maxMove || action.zmove
+				) {
+					continue;
+				}
+				if (action.pokemon.isAlly(source) && ['mistblast'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
@@ -702,26 +717,23 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			metronome: 1,
 			unite: 1
 		},
-		volatileStatus: 'floweringfieldsforever',
-		onHit(target, source, move) {
-			target.addVolatile('floweringfieldsforever');
-		},
+		volatileStatus: 'floweryfieldsforever',
 		condition: {
+			duration: 4,
 			noCopy: true,
-			duration: 8,
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Flowering Fields Forever');
+				this.add('-start', pokemon, 'Flowery Fields Forever');
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {
-				this.heal(pokemon.baseMaxhp / 8);
+				this.heal(pokemon.baseMaxhp / 4);
 			},
-            onEnd(pokemon) {
-                this.add('-end', pokemon, 'Flowering Fields Forever');
-            },
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Flowery Fields Forever');
+			}
 		},
 		secondary: null,
-		target: "allies",
+		target: "adjacentAlly",
 		type: "Fairy",
 	},
 	fluffycreamsupreme: {
@@ -968,7 +980,9 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			protect: 1,
 			unite: 1
 		},
-		sideCondition: 'laprasexpress',
+		self: {
+			sideCondition: "laprasexpress"
+		},
 		condition: {
 			duration: 4,
 			durationCallback(target, source, effect) {
@@ -1114,6 +1128,21 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 			protect: 1,
 			unite: 1
 		},
+		onPrepareHit(target, source, move) {
+			for (const action of this.queue.list as MoveAction[]) {
+				if (
+					!action.move || !action.pokemon?.isActive ||
+					action.pokemon.fainted || action.maxMove || action.zmove
+				) {
+					continue;
+				}
+				if (action.pokemon.isAlly(source) && ['eonblast'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
@@ -1150,6 +1179,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		},
 		condition: {
 			noCopy: true, // don’t pass via Baton Pass etc.
+			duration: 2,
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Phantom Veil');
 			},
