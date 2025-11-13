@@ -22588,4 +22588,19 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		zMove: { boost: { def: 1 } },
 		contestType: "Cool",
 	},
+    blazingrush: {
+        num: 5009,
+        accuracy: 100,
+        basePower: 60,
+        isNonstandard: "Custom",
+        category: "Physical",
+        name: "Blazing Rush",
+        pp: 10,
+        priority: 1,
+        flags: { contact: 1, protect: 1, mirror: 1, defrost: 1, metronome: 1 },
+        recoil: [50, 100],
+        secondary: null,
+        target: "normal",
+        type: "Fire",
+    }
 };

@@ -21654,5 +21654,27 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 0.4,
 		color: "Brown",
 		eggGroups: ["Bug", "Mineral"]
-	}
+	},
+	flairees: {
+		num: -1018,
+		name: "Flairees",
+		types: ["Fire", "Rock"],
+		baseStats: { hp: 80, atk: 112, def: 71, spa: 89, spd: 83, spe: 92 },
+		abilities: { 0: "Blaze", H: "Reckless" },
+		heightm: 1.5,
+		weightkg: 182.3,
+		color: "Red",
+		eggGroups: ["Field"]
+	},
+	cassowrath: {
+		num: -1019,
+		name: "Cassowrath",
+		types: ["Rock", "Fire"],
+		baseStats: { hp: 73, atk: 118, def: 79, spa: 56, spd: 53, spe: 114 },
+		abilities: { 0: "Flash Fire", H: "Rock Head" },
+		heightm: 1.7,
+		weightkg: 120,
+		color: "Red",
+		eggGroups: ["Field", "Flying"]
+	},
 };
