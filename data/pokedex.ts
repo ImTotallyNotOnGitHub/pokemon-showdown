@@ -7639,6 +7639,21 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		prevo: "Luxio",
 		evoLevel: 30,
 		eggGroups: ["Field"],
+		otherFormes: ["Luxray-Alatia"],
+		formeOrder: ["Luxray", "Luxray-Alatia"]
+	},
+	luxrayalatia: {
+		num: 405,
+		name: "Luxray-Alatia",
+		forme: "Alatia",
+		baseSpecies: "Luxray",
+		types: ["Ground", "Psychic"],
+		baseStats: { hp: 80, atk: 85, def: 79, spa: 120, spd: 79, spe: 80 },
+		abilities: { 0: "Sand Rush", 1: "Competitive", H: "Tinted Lens" },
+		heightm: 1.4,
+		weightkg: 42,
+		color: "Brown",
+		eggGroups: ["Field"],
 	},
 	budew: {
 		num: 406,
@@ -21677,4 +21692,59 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		color: "Red",
 		eggGroups: ["Field", "Flying"]
 	},
+	dorilume: {
+		num: -1020,
+		name: "Dorilume",
+		types: ["Water", "Electric"],
+		baseStats: { hp: 90, atk: 41, def: 88, spa: 95, spd: 104, spe: 20 },
+		abilities: { 0: "Electromorphosis", H: "Regenerator" },
+		heightm: 0.3,
+		weightkg: 1.5,
+		color: "Blue",
+		eggGroups: ["Water 1", "Fairy"]
+	},
+	manafreed: {
+		num: -1021,
+		name: "Manafreed",
+		types: ["Fighting", "Grass"],
+		baseStats: { hp: 105, atk: 65, def: 105, spa: 110, spd: 80, spe: 60 },
+		abilities: { 0: "Rain Dish", 1: "Thick Fat", H: "Scrappy" },
+		heightm: 5,
+		weightkg: 400,
+		color: "Gray",
+		eggGroups: ["Water 1", "Field"]
+	},
+	chiroquila: {
+		num: -1022,
+		name: "Chiroquila",
+		types: ["Fairy", "Flying"],
+		baseStats: { hp: 73, atk: 68, def: 49, spa: 77, spd: 81, spe: 102 },
+		abilities: { 0: "Sap Sipper", 1: "Gluttony", H: "Harvest" },
+		heightm: 2.3,
+		weightkg: 112.3,
+		color: "Green",
+		eggGroups: ["Field", "Flying"]
+	},
+	spinaga: {
+		num: -1023,
+		name: "Spinaga",
+		types: ["Grass", "Dragon"],
+		baseStats: { hp: 110, atk: 100, def: 85, spa: 80, spd: 105, spe: 60 },
+		abilities: { 0: "Filter", 1: "Shed Skin", H: "Marvel Scale" },
+		heightm: 1.5,
+		weightkg: 65.2,
+		color: "Green",
+		eggGroups: ["Grass", "Dragon"]
+	},
+	coracondra: {
+		num: -1024,
+		name: "Coracondra",
+		types: ["Rock", "Dragon"],
+		baseStats: { hp: 83, atk: 108, def: 90, spa: 76, spd: 78, spe: 80 },
+		abilities: { 0: "Weak Armor", 1: "Shed Skin", H: "Poison Heal" },
+		heightm: 11,
+		weightkg: 483,
+		color: "Yellow",
+		eggGroups: ["Field", "Dragon"]
+	}
 };
