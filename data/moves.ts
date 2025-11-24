@@ -22591,7 +22591,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
     blazingrush: {
         num: 5009,
         accuracy: 100,
-        basePower: 60,
+        basePower: 50,
         isNonstandard: "Custom",
         category: "Physical",
         name: "Blazing Rush",
