@@ -21746,5 +21746,16 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 483,
 		color: "Yellow",
 		eggGroups: ["Field", "Dragon"]
+	},
+	mantiverous: {
+		num: -1025,
+		name: "Mantiverous",
+		types: ["Bug", "Water"],
+		baseStats: { hp: 90, atk: 120, def: 65, spa: 105, spd: 45, spe: 110 },
+		abilities: { 0: "Sharpness", 1: "Sheer Force", H: "No Guard" },
+		heightm: 1.3,
+		weightkg: 40,
+		color: "Blue",
+		eggGroups: ["Bug", "Water 3"]
 	}
 };
