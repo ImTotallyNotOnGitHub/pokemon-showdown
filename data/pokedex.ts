@@ -21757,5 +21757,16 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 40,
 		color: "Blue",
 		eggGroups: ["Bug", "Water 3"]
+	},
+	frigidgale: {
+		num: -1026,
+		name: "Frigid Gale",
+		types: ["Flying", "Ice"],
+		baseStats: { hp: 97, atk: 91, def: 95, spa: 121, spd: 73, spe: 113 },
+		abilities: { 0: "Protosynthesis" },
+		heightm: 4.5,
+		weightkg: 52.6,
+		color: "Green",
+		eggGroups: ["Undiscovered"]
 	}
 };

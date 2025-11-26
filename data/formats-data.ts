@@ -6383,71 +6383,131 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	ironripple: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
 	},
 	wildspark: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TOU"
 	},
 	hyrealis: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TOU"
 	},
 	ranabyss: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TOU"
 	},
   	bowldozer: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
   	},
   	ferrosleyer: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
   	},
   	ursashock: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
   	},
   	jacturne: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TRU"
   	},
   	fimbulven: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
   	},
   	turalyzer: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
   	},
 	skeetobelle: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
 	},
 	fenskito: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TUU"
 	},
 	beelzebuzz: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TRU"
 	},
 	beelzebuzzf: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "Illegal"
+		natDexTier: "TRU"
+	},
+	miralspine: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	calciopi: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	buzzlex: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	flairees: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TOU"
+	},
+	cassowrath: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TUU"
+	},
+	dorilume: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	manafreed: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	chiroquila: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TRU"
+	},
+	spinaga: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TOU"
+	},
+	coracondra: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	mantiverous: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	frigidgale: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
 	}
 };
