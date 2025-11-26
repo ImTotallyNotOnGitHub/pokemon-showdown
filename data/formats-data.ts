@@ -6503,7 +6503,7 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	mantiverous: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?"
+		natDexTier: "TOU"
 	},
 	frigidgale: {
 		isNonstandard: "Custom",
