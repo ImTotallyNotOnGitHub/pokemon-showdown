@@ -19,6 +19,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 	},
+	venusaurdelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
+	},
 	charmander: {
 		tier: "LC",
 	},
@@ -43,6 +48,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	charizardgmax: {
 		isNonstandard: "Past",
 		tier: "Illegal",
+	},
+	charizarddelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
 	},
 	squirtle: {
 		tier: "LC",
@@ -122,6 +132,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 		natDexTier: "RU",
+	},
+	pidgeotdelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
 	},
 	rattata: {
 		isNonstandard: "Past",
@@ -937,6 +952,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		doublesTier: "NFE",
 		natDexTier: "NFE",
 	},
+	scytherdelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
+	},
 	scizor: {
 		tier: "OU",
 		doublesTier: "(DUU)",
@@ -946,6 +966,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 		natDexTier: "OU",
+	},
+	scizordelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
 	},
 	kleavor: {
 		tier: "RU",
@@ -1843,6 +1868,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "Illegal",
 		natDexTier: "UU",
 	},
+	gardevoirdelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
+	},
 	gallade: {
 		tier: "RU",
 		doublesTier: "(DUU)",
@@ -1852,6 +1882,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 		natDexTier: "UUBL",
+	},
+	galladedelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
 	},
 	surskit: {
 		tier: "LC",
@@ -2364,6 +2399,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 		natDexTier: "Uber",
+	},
+	metagrossdelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL",
 	},
 	regirock: {
 		tier: "ZU",
@@ -3206,6 +3246,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	darmanitangalarzen: {
 		isNonstandard: "Past",
 	},
+	darmanitandelta: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "RUBL",
+	},
 	maractus: {
 		isNonstandard: "Past",
 		tier: "Illegal",
@@ -3921,6 +3966,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "Illegal",
 		natDexTier: "RU",
 	},
+	tyrantrumprimordial: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "UUBL",
+	},
 	amaura: {
 		isNonstandard: "Past",
 		tier: "Illegal",
@@ -4018,6 +4068,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "PU",
 		doublesTier: "(DUU)",
 		natDexTier: "RU",
+	},
+	avaluggdelta: {
+		tier: "Illegal",
+		doublesTier: "Illegal",
+		natDexTier: "RUBL",
 	},
 	noibat: {
 		tier: "LC",
@@ -4333,6 +4388,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 		natDexTier: "RU",
+	},
+	golisopodvirelia: {
+		isNonstandard: "Past",
+		tier: "Illegal",
+		natDexTier: "UUBL",
 	},
 	sandygast: {
 		tier: "LC",
@@ -6506,6 +6566,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		natDexTier: "TOU"
 	},
 	frigidgale: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	worvator: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "T?"
