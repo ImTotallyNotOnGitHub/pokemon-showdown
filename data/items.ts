@@ -7752,5 +7752,23 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		num: -6,
 		gen: 9,
 		isNonstandard: "Custom",
+	},
+	taoflame: {
+		name: "Flame of Tao",
+		spritenum: 9997,
+		num: -9501,
+		gen: 9,
+	},
+	taospark: {
+		name: "Spark of Tao",
+		spritenum: 9998,
+		num: -9502,
+		gen: 9,
+	},
+	taoshard: {
+		name: "Shard of Tao",
+		spritenum: 9999,
+		num: -9503,
+		gen: 9,
 	}
 };

@@ -722,6 +722,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Past",
 		tier: "Illegal",
 	},
+	gengarx: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?",
+	},
 	onix: {
 		isNonstandard: "Past",
 		tier: "Illegal",
@@ -3711,6 +3716,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		doublesTier: "DUber",
 		natDexTier: "Uber",
 	},
+	kyuremcomplete: {
+		tier: "Illegal",
+		isNonstandard: "Custom",
+		natDexTier: "T?",
+	},
 	keldeo: {
 		tier: "UU",
 		doublesTier: "(DUU)",
@@ -6571,6 +6581,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		natDexTier: "T?"
 	},
 	worvator: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	fabledshell: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "T?"

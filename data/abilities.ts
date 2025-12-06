@@ -5872,69 +5872,96 @@ augment: {
 		rating: 3.5,
 		num: -1007
 	},
-heartofthesea: {
-  onStart(pokemon) {
-    this.add('-ability', pokemon, 'Heart of the Sea');
-    this.add('-message', `${pokemon.name}'s defenses now act as if it's a pure Water type!`);
-  },
-  onEffectiveness(typeMod, target, type, move) {
-    if (!target || !move) return;
-    if (move.category === 'Status') return; // Status moves don't deal damage
+	heartofthesea: {
+	onStart(pokemon) {
+		this.add('-ability', pokemon, 'Heart of the Sea');
+		this.add('-message', `${pokemon.name}'s defenses now act as if it's a pure Water type!`);
+	},
+	onEffectiveness(typeMod, target, type, move) {
+		if (!target || !move) return;
+		if (move.category === 'Status') return; // Status moves don't deal damage
 
-    // Simulate being pure Water type on defense
-    const waterEffectiveness = this.dex.getEffectiveness(move, 'Water');
-    const actualEffectiveness = this.dex.getEffectiveness(move, type);
+		// Simulate being pure Water type on defense
+		const waterEffectiveness = this.dex.getEffectiveness(move, 'Water');
+		const actualEffectiveness = this.dex.getEffectiveness(move, type);
 
-    // Adjust typeMod to reflect Water-type instead of actual type
-    // Replace effectiveness only on first type (since we're treating it as monotype)
-    if (type === target.types[0]) {
-      return waterEffectiveness - actualEffectiveness;
-    }
-  },
-  name: "Heart of the Sea",
-  rating: 3.5,
-  num: -9999, // Custom number
-},
-  royalhusk: {
-    // Prevents defense drop from foes' moves/abilities
-    onTryBoost(boost, target, source, effect) {
-      if (source && source !== target && boost.def && boost.def < 0) {
-        // Remove the defense property (cancels the defense reduction)
-        delete boost.def;
-        // Sends a message in the battle log about it failing to reduce defense
-        this.add('-fail', target, 'unboost', 'Defense', '[from] ability: Royal Husk');
-      }
-    },
-    
-    // Tracks number of foes that are inflicted with Scarab Swarm each turn
-    onStart(pokemon) {
-      this.effectState.prevCount = 0;
-    },
-    
-    // End of each turn, compare current number of Scarab Swarm inflicted foes with last turn
-    // Readjusts the defense based on that value
-    onResidual(pokemon) {
-      const want = pokemon.foes().filter(foe => foe && foe.volatiles && foe.volatiles['scarabswarm']).length;
-      const applied = this.effectState.prevCount || 0;
-      let diff = want - applied;
-      if (!diff) return;
+		// Adjust typeMod to reflect Water-type instead of actual type
+		// Replace effectiveness only on first type (since we're treating it as monotype)
+		if (type === target.types[0]) {
+		return waterEffectiveness - actualEffectiveness;
+		}
+	},
+	name: "Heart of the Sea",
+	rating: 3.5,
+	num: -9999, // Custom number
+	},
+	royalhusk: {
+		// Prevents defense drop from foes' moves/abilities
+		onTryBoost(boost, target, source, effect) {
+		if (source && source !== target && boost.def && boost.def < 0) {
+			// Remove the defense property (cancels the defense reduction)
+			delete boost.def;
+			// Sends a message in the battle log about it failing to reduce defense
+			this.add('-fail', target, 'unboost', 'Defense', '[from] ability: Royal Husk');
+		}
+		},
+		
+		// Tracks number of foes that are inflicted with Scarab Swarm each turn
+		onStart(pokemon) {
+		this.effectState.prevCount = 0;
+		},
+		
+		// End of each turn, compare current number of Scarab Swarm inflicted foes with last turn
+		// Readjusts the defense based on that value
+		onResidual(pokemon) {
+		const want = pokemon.foes().filter(foe => foe && foe.volatiles && foe.volatiles['scarabswarm']).length;
+		const applied = this.effectState.prevCount || 0;
+		let diff = want - applied;
+		if (!diff) return;
 
-      // If we need to add but total Defense is already at +6, skip
-      // This avoids lowering the Defense after scarab swarm ends if it was not responsible for raising Defense
-      if (diff > 0 && (pokemon.boosts.def || 0) >= 6) {
-        return;
-      }
+		// If we need to add but total Defense is already at +6, skip
+		// This avoids lowering the Defense after scarab swarm ends if it was not responsible for raising Defense
+		if (diff > 0 && (pokemon.boosts.def || 0) >= 6) {
+			return;
+		}
 
-      const before = pokemon.boosts.def || 0;
-      this.boost({def: diff}, pokemon);
-      const after = pokemon.boosts.def || 0;
-      const actual = after - before;
-      this.effectState.prevCount = applied + actual;
-    },
+		const before = pokemon.boosts.def || 0;
+		this.boost({def: diff}, pokemon);
+		const after = pokemon.boosts.def || 0;
+		const actual = after - before;
+		this.effectState.prevCount = applied + actual;
+		},
 
-    flags: {},
-    name: "Royal Husk",
-    rating: 3,
-    num: -9020
-  },
-	};
+		flags: {},
+		name: "Royal Husk",
+		rating: 3,
+		num: -9020
+	},
+	taoresonance: {
+		onBasePowerPriority: 24,
+		onBasePower(basePower, attacker, defender, move) {
+		const type = move.type;
+		if (type !== 'Fire' && type !== 'Electric' && type !== 'Ice') return;
+
+		const consumedTypeByItem = {
+			taoflame: 'Fire',
+			taospark: 'Electric',
+			taoshard: 'Ice',
+		};
+
+		const held = attacker.getItem();
+		const id = this.toID(held?.id || held);
+		const consumed = consumedTypeByItem[id] || null;
+
+		// Skip the consumed type (based on its held item)
+		if (consumed && type === consumed) return;
+		
+		// Apply 1.2x boost
+		return this.chainModify([4915, 4096]);
+		},
+		flags: {},
+		name: "Tao Resonance",
+		rating: 4,
+		num: -9500
+	}
+};
