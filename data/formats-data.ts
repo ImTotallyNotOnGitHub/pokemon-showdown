@@ -725,7 +725,7 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	gengarx: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?",
+		natDexTier: "TRU",
 	},
 	onix: {
 		isNonstandard: "Past",
@@ -6523,17 +6523,17 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	miralspine: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?"
+		natDexTier: "TUU"
 	},
 	calciopi: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?"
+		natDexTier: "TUU"
 	},
 	buzzlex: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?"
+		natDexTier: "TRU"
 	},
 	flairees: {
 		isNonstandard: "Custom",
@@ -6578,12 +6578,12 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	frigidgale: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?"
+		natDexTier: "TOU"
 	},
 	worvator: {
 		isNonstandard: "Custom",
 		tier: "Illegal",
-		natDexTier: "T?"
+		natDexTier: "TUU"
 	},
 	fabledshell: {
 		isNonstandard: "Custom",
