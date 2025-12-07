@@ -7753,22 +7753,37 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		gen: 9,
 		isNonstandard: "Custom",
 	},
-	taoflame: {
+	flameoftao: {
 		name: "Flame of Tao",
+		onTakeItem(item, source) {
+			if (!this.activeMove) return false;
+			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
+		},
 		spritenum: 9997,
 		num: -9501,
 		gen: 9,
+		isNonstandard: "Custom",
 	},
-	taospark: {
+	sparkoftao: {
 		name: "Spark of Tao",
+		onTakeItem(item, source) {
+			if (!this.activeMove) return false;
+			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
+		},
 		spritenum: 9998,
 		num: -9502,
 		gen: 9,
+		isNonstandard: "Custom",
 	},
-	taoshard: {
+	shardoftao: {
 		name: "Shard of Tao",
+		onTakeItem(item, source) {
+			if (!this.activeMove) return false;
+			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
+		},
 		spritenum: 9999,
 		num: -9503,
 		gen: 9,
+		isNonstandard: "Custom",
 	}
 };

@@ -21830,5 +21830,27 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 1,
 		color: "Green",
 		eggGroups: ["Undiscovered"]
+	},
+	ashenroar: {
+		num: -1030,
+		name: "Ashen Roar",
+		types: ["Ground", "Fire"],
+		baseStats: { hp: 93, atk: 131, def: 95, spa: 73, spd: 81, spe: 117 },
+		abilities: { 0: "Protosynthesis" },
+		heightm: 3.5,
+		weightkg: 195,
+		color: "Orange",
+		eggGroups: ["Undiscovered"]
+	},
+	balefulstorm: {
+		num: -1031,
+		name: "Baleful Storm",
+		types: ["Electric", "Dark"],
+		baseStats: { hp: 85, atk: 119, def: 89, spa: 107, spd: 85, spe: 105 },
+		abilities: { 0: "Protosynthesis" },
+		heightm: 3.5,
+		weightkg: 195,
+		color: "Blue",
+		eggGroups: ["Undiscovered"]
 	}
 };

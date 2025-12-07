@@ -5944,9 +5944,9 @@ augment: {
 		if (type !== 'Fire' && type !== 'Electric' && type !== 'Ice') return;
 
 		const consumedTypeByItem = {
-			taoflame: 'Fire',
-			taospark: 'Electric',
-			taoshard: 'Ice',
+			flameoftao: 'Fire',
+			sparkoftao: 'Electric',
+			shardoftao: 'Ice',
 		};
 
 		const held = attacker.getItem();

@@ -6589,5 +6589,15 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "T?"
+	},
+	ashenroar: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	balefulstorm: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
 	}
 };
