@@ -873,7 +873,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			if (pokemon.ability === 'taoresonance') {
 				type = pokemon.getItem().onTao;
 				if (!type) {
-					type = 'Normal';
+					type = 'Dragon';
 				}
 			}
 			return [type];
