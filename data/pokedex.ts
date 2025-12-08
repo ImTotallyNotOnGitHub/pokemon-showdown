@@ -11965,7 +11965,8 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 325,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
-		changesFrom: "Kyurem",
+		requiredItem: "Fire Tao",
+		changesFrom: "Kyurem-Complete",
 	},
 	kyuremcompleteelectric: {
 		num: 646,
@@ -11980,7 +11981,8 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 325,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
-		changesFrom: "Kyurem",
+		requiredItem: "Electric Tao",
+		changesFrom: "Kyurem-Complete",
 	},
 	kyuremcompleteice: {
 		num: 646,
@@ -11995,6 +11997,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 325,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItem: "Ice Tao",
 		changesFrom: "Kyurem",
 	},
 	keldeo: {
