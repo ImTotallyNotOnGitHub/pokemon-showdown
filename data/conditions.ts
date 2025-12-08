@@ -868,7 +868,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		name: 'Kyurem-Complete',
 		onTypePriority: 1,
 		onType(types, pokemon) {
-			if (pokemon.transformed || pokemon.ability !== 'taoresonance' && this.gen >= 8) return types;
+			if (pokemon.ability !== 'taoresonance' && this.gen >= 8) return types;
 			let type: string | undefined = 'Dragon';
 			if (pokemon.ability === 'taoresonance') {
 				type = pokemon.getItem().onTao;

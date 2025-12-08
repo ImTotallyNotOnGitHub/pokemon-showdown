@@ -11954,7 +11954,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	},
 	kyuremcompletefire: {
 		num: 646,
-		name: "Kyurem-Complete-Fre",
+		name: "Kyurem-Complete-Fire",
 		baseSpecies: "Kyurem",
 		forme: "Complete",
 		types: ["Dragon", "Fire"],
