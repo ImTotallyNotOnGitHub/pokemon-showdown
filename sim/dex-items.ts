@@ -43,6 +43,11 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 	 */
 	readonly onMemory?: string;
 	/**
+	 * If this is a Memory: The type it turns Multi-Attack into.
+	 * undefined, if not a Memory.
+	 */
+	readonly onTao?: string;
+	/**
 	 * If this is a mega stone: The name (e.g. Charizard-Mega-X) of the
 	 * forme this allows transformation into.
 	 * undefined, if not a mega stone.
@@ -115,6 +120,7 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 		this.fling = data.fling || undefined;
 		this.onDrive = data.onDrive || undefined;
 		this.onMemory = data.onMemory || undefined;
+		this.onTao = data.onTao || undefined;
 		this.megaStone = data.megaStone || undefined;
 		this.megaEvolves = data.megaEvolves || undefined;
 		this.zMove = data.zMove || undefined;
@@ -153,6 +159,7 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 		if (this.onDrive) this.fling = { basePower: 70 };
 		if (this.megaStone) this.fling = { basePower: 80 };
 		if (this.onMemory) this.fling = { basePower: 50 };
+		if (this.onTao) this.fling = { basePower: 50 };
 
 		assignMissingFields(this, data);
 	}

@@ -7753,34 +7753,49 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		gen: 9,
 		isNonstandard: "Custom",
 	},
-	flameoftao: {
-		name: "Flame of Tao",
-		onTakeItem(item, source) {
-			if (!this.activeMove) return false;
-			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
+	firetao: {
+		name: "Fire Tao",
+		onTao: 'Fire',
+		onTakeItem(item, pokemon, source) {
+			if ((source && source.baseSpecies.num === 646) || pokemon.baseSpecies.num === 646) {
+				return false;
+			}
+			return true;
 		},
+		forcedForme: "Kyurem-Complete-Fire",
+		itemUser: ["Kyurem-Complete-Fire"],
 		spritenum: 9997,
 		num: -9501,
 		gen: 9,
 		isNonstandard: "Custom",
 	},
-	sparkoftao: {
-		name: "Spark of Tao",
-		onTakeItem(item, source) {
-			if (!this.activeMove) return false;
-			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
+	electrictao: {
+		name: "Electric Tao",
+		onTao: 'Electric',
+		onTakeItem(item, pokemon, source) {
+			if ((source && source.baseSpecies.num === 646) || pokemon.baseSpecies.num === 646) {
+				return false;
+			}
+			return true;
 		},
+		forcedForme: "Kyurem-Complete-Electric",
+		itemUser: ["Kyurem-Complete-Electric"],
 		spritenum: 9998,
 		num: -9502,
 		gen: 9,
 		isNonstandard: "Custom",
 	},
-	shardoftao: {
-		name: "Shard of Tao",
-		onTakeItem(item, source) {
-			if (!this.activeMove) return false;
-			if (this.activeMove.id !== 'knockoff' && this.activeMove.id !== 'thief' && this.activeMove.id !== 'covet') return false;
+	icetao: {
+		name: "Ice Tao",
+		onTao: 'Ice',
+		onTakeItem(item, pokemon, source) {
+			if ((source && source.baseSpecies.num === 646) || pokemon.baseSpecies.num === 646) {
+				return false;
+			}
+			return true;
 		},
+		forcedForme: "Kyurem-Complete-Ice",
+		itemUser: ["Kyurem-Complete-Ice"],
 		spritenum: 9999,
 		num: -9503,
 		gen: 9,

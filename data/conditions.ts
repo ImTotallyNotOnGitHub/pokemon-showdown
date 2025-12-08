@@ -864,6 +864,21 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			return [type];
 		},
 	},
+	kyuremcomplete: {
+		name: 'Kyurem-Complete',
+		onTypePriority: 1,
+		onType(types, pokemon) {
+			if (pokemon.transformed || pokemon.ability !== 'taoresonance' && this.gen >= 8) return types;
+			let type: string | undefined = 'Normal';
+			if (pokemon.ability === 'taoresonance') {
+				type = pokemon.getItem().onTao;
+				if (!type) {
+					type = 'Normal';
+				}
+			}
+			return [type];
+		},
+	},
 	silvally: {
 		name: 'Silvally',
 		onTypePriority: 1,

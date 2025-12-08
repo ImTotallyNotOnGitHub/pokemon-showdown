@@ -5941,25 +5941,12 @@ augment: {
 		onBasePowerPriority: 24,
 		onBasePower(basePower, attacker, defender, move) {
 		const type = move.type;
-		if (type !== 'Fire' && type !== 'Electric' && type !== 'Ice') return;
-
-		const consumedTypeByItem = {
-			flameoftao: 'Fire',
-			sparkoftao: 'Electric',
-			shardoftao: 'Ice',
-		};
-
-		const held = attacker.getItem();
-		const id = this.toID(held?.id || held);
-		const consumed = consumedTypeByItem[id] || null;
-
-		// Skip the consumed type (based on its held item)
-		if (consumed && type === consumed) return;
-		
+		const isTao = attacker.getTypes().includes('Electric') || attacker.getTypes().includes('Fire') || attacker.getTypes().includes('Ice');
+		if (!isTao) return;
 		// Apply 1.2x boost
 		return this.chainModify([4915, 4096]);
 		},
-		flags: {},
+		flags: { failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, cantsuppress: 1 },
 		name: "Tao Resonance",
 		rating: 4,
 		num: -9500
