@@ -21635,7 +21635,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
     	num: -1009,
     	name: "Fimbulven",
     	types: ["Ice", "Dark"],
-    	baseStats: { hp: 125, atk: 60, def: 70, spa: 110, spd: 65, spe: 90 },
+    	baseStats: { hp: 97, atk: 71, def: 70, spa: 107, spd: 72, spe: 82 },
     	abilities: { 0: "Slush Rush", 1: "Gale Wings", H: "Snow Warning" },
     	heightm: 1.8,
     	weightkg: 59,
@@ -21883,7 +21883,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		num: -1030,
 		name: "Ashen Roar",
 		types: ["Ground", "Fire"],
-		baseStats: { hp: 93, atk: 131, def: 95, spa: 73, spd: 81, spe: 117 },
+		baseStats: { hp: 95, atk: 137, def: 99, spa: 81, spd: 81, spe: 97 },
 		abilities: { 0: "Protosynthesis" },
 		heightm: 3.5,
 		weightkg: 195,
@@ -21900,5 +21900,27 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 195,
 		color: "Blue",
 		eggGroups: ["Undiscovered"]
-	}
+	},
+	purlady: {
+		num: -1032,
+		name: "Purlady",
+		types: ["Fairy", "Fire"],
+		baseStats: { hp: 70, atk: 114, def: 64, spa: 64, spd: 58, spe: 82 },
+		abilities: { 0: "Limber", 1: "Flame Body", H: "Opportunist" },
+		heightm: 1.1,
+		weightkg: 10.3,
+		color: "Red",
+		eggGroups: ["Field"]
+	},
+	shiboom: {
+		num: -1033,
+		name: "Shiboom",
+		types: ["Fire", "Dragon"],
+		baseStats: { hp: 61, atk: 64, def: 52, spa: 97, spd: 71, spe: 139 },
+		abilities: { 0: "Flash Fire", 1: "Unburden", H: "Dancer" },
+		heightm: 2.0,
+		weightkg: 8.5,
+		color: "Red",
+		eggGroups: ["Dragon"]
+	},
 };

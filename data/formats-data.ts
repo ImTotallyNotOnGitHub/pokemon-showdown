@@ -6599,5 +6599,15 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "T?"
+	},
+	purlady: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	shiboom: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TRU"
 	}
 };
