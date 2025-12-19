@@ -14331,6 +14331,19 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		color: "Pink",
 		eggGroups: ["Grass"],
 	},
+	lurantislasia: {
+		num: 754,
+		name: "Lurantis-Lasia",
+		baseSpecies: "Lurantis",
+		forme: "Lasia",
+		types: ["Grass", "Fairy"],
+		baseStats: { hp: 65, atk: 100, def: 70, spa: 95, spd: 80, spe: 70 },
+		abilities: { 0: "Mimicry", 1: "Serene Grace", H: "Contrary" },
+		heightm: 0.9,
+		weightkg: 18.5,
+		color: "Purple",
+		eggGroups: ["Grass", "Fairy"],
+	},
 	morelull: {
 		num: 755,
 		name: "Morelull",
@@ -21922,5 +21935,16 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 8.5,
 		color: "Red",
 		eggGroups: ["Dragon"]
+	},
+	nitragon: {
+		num: -1034,
+		name: "Nitragon",
+		types: ["Fire", "Steel"],
+		baseStats: { hp: 81, atk: 71, def: 69, spa: 115, spd: 85, spe: 90 },
+		abilities: { 0: "Soundproof", 1: "Scrappy", H: "Combustion Chamber" },
+		heightm: 1.9,
+		weightkg: 143.2,
+		color: "Brown",
+		eggGroups: ["Monster", "Dragon"]
 	},
 };

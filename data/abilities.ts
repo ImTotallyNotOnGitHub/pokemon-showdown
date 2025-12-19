@@ -5759,12 +5759,12 @@ augment: {
 			// Runs before the move used
 			onModifyMove(move, attacker, defender) {
 			if (attacker.transformed) return;
-		/*
-		* Selects the forme
-		* If the move used is Phantom Proxy -> Switch to Creaking Forme
-		* If the move used is a Status Move (excluding Phantom Proxy) -> Switch to Base Forme
-		* Else -> Do not change Forme
-		*/
+
+		// Selects the forme
+		// If the move used is Phantom Proxy -> Switch to Creaking Forme
+		// If the move used is a Status Move (excluding Phantom Proxy) -> Switch to Base Forme
+		// Else -> Do not change Forme
+
 			const base = attacker.species.baseSpecies;
 			const targetForme = move.id === "phantomproxy" ? `${base}-Craftia-Creaking` : move.category === "Status" ? `${base}-Craftia` : null;
 			if (!targetForme) return;
@@ -5893,7 +5893,7 @@ augment: {
 	},
 	name: "Heart of the Sea",
 	rating: 3.5,
-	num: -9999, // Custom number
+	num: -9999,
 	},
 	royalhusk: {
 		// Prevents defense drop from foes' moves/abilities
@@ -5950,5 +5950,17 @@ augment: {
 		name: "Tao Resonance",
 		rating: 4,
 		num: -9500
-	}
+	},
+	combustionchamber: {
+		onModifyTypePriority: -1,
+		onModifyType(move, pokemon) {
+			if (move.flags['sound'] && !pokemon.volatiles['dynamax']) { // hardcode
+				move.type = 'Fire';
+			}
+		},
+		flags: {},
+		name: "Combustion Chamber",
+		rating: 1.5,
+		num: -9998,
+	},
 };
