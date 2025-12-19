@@ -100616,7 +100616,7 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			hammerarm: ["9M"],
 			ingrain: ["9M"],
 			knockoff: ["9M"],
-			leafage
+			leafage: ["9M"],
 			leafblade: ["9M"],
 			leafstorm: ["9M"],
 			leechlife: ["9M"],
