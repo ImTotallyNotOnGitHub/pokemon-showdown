@@ -6609,5 +6609,15 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "TRU"
+	},
+	nitragon: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TUU"
+	},
+	lurantislasia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
 	}
 };
