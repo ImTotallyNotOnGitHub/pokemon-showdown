@@ -21886,7 +21886,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		name: "Bellicate",
 		types: ["Normal", "Dragon"],
 		baseStats: { hp: 95, atk: 145, def: 115, spa: 70, spd: 70, spe: 45 },
-		abilities: { 0: "Protosynthesis" },
+		abilities: { 0: "Anger Point", H: "Pressure" },
 		heightm: 1,
 		weightkg: 1,
 		color: "Green",
@@ -21946,5 +21946,53 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		weightkg: 143.2,
 		color: "Brown",
 		eggGroups: ["Monster", "Dragon"]
+	},
+	ironbell: {
+		num: -1035,
+		name: "Iron Bell",
+		types: ["Grass", "Poison"],
+		baseStats: { hp: 96, atk: 136, def: 112, spa: 72, spd: 102, spe: 72 },
+		abilities: { 0: "Quark Drive" },
+		heightm: 2.5,
+		weightkg: 9.2,
+		color: "Red",
+		eggGroups: ["Undiscovered"],
+		tags: ["Paradox"]
+	},
+	ironsail: {
+		num: -1036,
+		name: "Iron Sail",
+		types: ["Water", "Poison"],
+		baseStats: { hp: 72, atk: 70, def: 124, spa: 98, spd: 136, spe: 78 },
+		abilities: { 0: "Quark Drive" },
+		heightm: 2.5,
+		weightkg: 9.2,
+		color: "Purple",
+		eggGroups: ["Undiscovered"],
+		tags: ["Paradox"]
+	},
+	ironbeak: {
+		num: -1037,
+		name: "Iron Beak",
+		types: ["Electric", "Poison"],
+		baseStats: { hp: 78, atk: 120, def: 74, spa: 112, spd: 74, spe: 122 },
+		abilities: { 0: "Quark Drive" },
+		heightm: 2.5,
+		weightkg: 9.2,
+		color: "Yellow",
+		eggGroups: ["Undiscovered"],
+		tags: ["Paradox"]
+	},
+	ironcocoon: {
+		num: -1038,
+		name: "Iron Cocoon",
+		types: ["Fairy", "Poison"],
+		baseStats: { hp: 98, atk: 68, def: 96, spa: 126, spd: 118, spe: 84 },
+		abilities: { 0: "Quark Drive" },
+		heightm: 2.5,
+		weightkg: 9.2,
+		color: "Pink",
+		eggGroups: ["Undiscovered"],
+		tags: ["Paradox"]
 	},
 };

@@ -22628,5 +22628,23 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
         target: "normal",
         type: "Dragon",
-    },	
+    },
+	noxiousmechanicus: {
+		num: 5011,
+		accuracy: 90,
+		basePower: 0,
+		damageCallback(pokemon, target) {
+			return this.clampIntRange(Math.floor(target.getUndynamaxedHP() / 3), 1);
+		},
+		category: "Special",
+		name: "Noxious Mechanicus",
+		pp: 10,
+		priority: 0,
+		flags: { protect: 1, mirror: 1 },
+    	ignoreImmunity: {Poison: true},
+		secondary: null,
+		target: "normal",
+		type: "Poison",
+		contestType: "Tough",
+	}
 };
