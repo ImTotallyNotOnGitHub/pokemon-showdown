@@ -6619,5 +6619,33 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "T?"
+	},
+	pumpkaboom: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "LC"
+	},
+	pumpkaboomsmall: {
+		isNonstandard: "Custom",
+	},
+	pumpkaboomlarge: {
+		isNonstandard: "Custom",
+	},
+	pumpkaboomsuper: {
+		isNonstandard: "Custom",
+	},
+	gourgrenade: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TRU"
+	},
+	gourgrenadesmall: {
+		isNonstandard: "Custom",
+	},
+	gourgrenadelarge: {
+		isNonstandard: "Custom",
+	},
+	gourgrenadesuper: {
+		isNonstandard: "Custom",
 	}
 };
