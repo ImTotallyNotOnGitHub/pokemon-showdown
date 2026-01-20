@@ -21998,7 +21998,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	pumpkaboom: {
 		num: -1039,
 		name: "Pumpkaboom",
-		baseForme: "Average",
+		baseForme: "Pumpkaboom",
 		types: ["Fire", "Grass"],
 		baseStats: { hp: 49, atk: 66, def: 70, spa: 24, spd: 55, spe: 71 },
 		abilities: { 0: "Aftermath", 1: "Bulletproof", H: "Reckless" },
@@ -22052,7 +22052,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	gourgrenade: {
 		num: -1040,
 		name: "Gourgrenade",
-		baseForme: "Average",
+		baseForme: "Gourgrenade",
 		types: ["Fire", "Grass"],
 		baseStats: { hp: 65, atk: 90, def: 122, spa: 38, spd: 75, spe: 104 },
 		abilities: { 0: "Aftermath", 1: "Bulletproof", H: "Reckless" },
@@ -22068,7 +22068,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		gourgrenadesmall: {
 		num: -1040,
 		name: "Gourgrenade-Small",
-		baseForme: "Average",
+		baseSpecies: "Gourgrenade",
 		types: ["Fire", "Grass"],
 		baseStats: { hp: 55, atk: 85, def: 122, spa: 38, spd: 75, spe: 119 },
 		abilities: { 0: "Aftermath", 1: "Bulletproof", H: "Reckless" },
@@ -22082,7 +22082,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		gourgrenadelarge: {
 		num: -1040,
 		name: "Gourgrenade-Large",
-		baseForme: "Average",
+		baseSpecies: "Gourgrenade",
 		types: ["Fire", "Grass"],
 		baseStats: { hp: 75, atk: 95, def: 122, spa: 38, spd: 75, spe: 89 },
 		abilities: { 0: "Aftermath", 1: "Bulletproof", H: "Reckless" },
@@ -22096,7 +22096,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		gourgrenadesuper: {
 		num: -1040,
 		name: "Gourgrenade-Super",
-		baseForme: "Average",
+		baseSpecies: "Gourgrenade",
 		types: ["Fire", "Grass"],
 		baseStats: { hp: 58, atk: 100, def: 122, spa: 38, spd: 75, spe: 74 },
 		abilities: { 0: "Aftermath", 1: "Bulletproof", H: "Reckless" },
