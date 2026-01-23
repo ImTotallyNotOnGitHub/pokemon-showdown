@@ -6588,6 +6588,21 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		color: "Brown",
 		evos: ["Milotic"],
 		eggGroups: ["Water 1", "Dragon"],
+		otherFormes: ["Feebas-Twilia"],
+		formeOrder: ["Feebas, Feebas-Twilia"]
+	},
+		feebastwilia: {
+		num: 349,
+		name: "Feebas-Twilia",
+		baseSpecies: "Feebas",
+		types: ["Water", "Dragon"],
+		baseStats: { hp: 20, atk: 20, def: 15, spa: 80, spd: 55, spe: 10 },
+		abilities: { 0: "Marvel Scale", 1: "Rattled", H: "Multiscale" },
+		heightm: 0.6,
+		weightkg: 7.4,
+		color: "Pink",
+		evos: ["Milotic-Twilia"],
+		eggGroups: ["Water 1", "Dragon"],
 	},
 	milotic: {
 		num: 350,
@@ -6611,8 +6626,8 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		baseSpecies: "Milotic",
 		forme: "Twilia",
 		types: ["Water", "Dragon"],
-		baseStats: { hp: 100, atk: 50, def: 88, spa: 110, spd: 122, spe: 80 },
-		abilities: { 0: "Marvel Scale", 1: "Intimidate", H: "Multiscale" },
+		baseStats: { hp: 100, atk: 50, def: 78, spa: 110, spd: 122, spe: 80 },
+		abilities: { 0: "Marvel Scale", 1: "Intimidate", H: "Arcane Thorns" },
 		heightm: 6.2,
 		weightkg: 162,
 		color: "Orange",
@@ -21659,11 +21674,12 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
     	num: -1010,
     	name: "Turalyzer",
     	types: ["Water", "Electric"],
-    	baseStats: { hp: 84, atk: 101, def: 100, spa: 88, spd: 90, spe: 72 },
+    	baseStats: { hp: 99, atk: 81, def: 110, spa: 88, spd: 90, spe: 82 },
     	abilities: { 0: "Heavy Metal", 1: "Swift Swim", H: "Steelworker" },
     	heightm: 3,
     	weightkg: 452.5,
     	color: "Blue",
+		prevo: "Choirtoise",
     	eggGroups: ["Field", "Water 1"]
   	},
 	velkareth: {
@@ -22107,4 +22123,16 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		evoType: "trade",
 		eggGroups: ["Amorphous"],
 	},
+  	choirtoise: {
+    	num: -1041,
+    	name: "Choirtoise",
+    	types: ["Water", "Electric"],
+    	baseStats: { hp: 63, atk: 68, def: 80, spa: 63, spd: 72, spe: 62 },
+    	abilities: { 0: "Heavy Metal", 1: "Swift Swim", H: "Steelworker" },
+    	heightm: 2.5,
+    	weightkg: 383.5,
+    	color: "Blue",
+		evos: ["Turalyzer",],
+    	eggGroups: ["Field", "Water 1"]
+  	},
 };

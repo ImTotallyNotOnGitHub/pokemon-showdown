@@ -6647,5 +6647,25 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 	},
 	gourgrenadesuper: {
 		isNonstandard: "Custom",
+	},
+	feebastwilia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	milotictwilia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	spiritombcraftia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
+	choirtoise: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
 	}
 };
