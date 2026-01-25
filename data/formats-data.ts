@@ -6667,5 +6667,135 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "T?"
+	},
+	clefablemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	victreebelmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	starmiemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	dragonitemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	meganiummega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	feraligatrmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	skarmorymega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	froslassmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	emboarmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	excadrillmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	scolipedemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	scraftymega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	eelektrossmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	chandeluremega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	chesnaughtmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	delphoxmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	greninjamega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	pyroarmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	dragalgemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	floettemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	malamarmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	barbaraclemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	hawluchamega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	zygardemega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	drampamega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
+	},
+	falinksmega: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "Illegal"
 	}
 };
