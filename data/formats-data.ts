@@ -6797,5 +6797,15 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "Custom",
 		tier: "Illegal",
 		natDexTier: "Illegal"
-	}
+	},
+	centisculk: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TOU"
+	},
+	roseradecraftia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
 };

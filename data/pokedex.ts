@@ -7817,6 +7817,19 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		evoType: "useItem",
 		evoItem: "Shiny Stone",
 		eggGroups: ["Fairy", "Grass"],
+		otherFormes: ["Roserade-Craftia"],
+		formeOrder: ["Roserade", "Roserade-Craftia"]
+	},
+	roseradecraftia: {
+		num: 407,
+		name: "Roserade-Craftia",
+		types: ["Dark", "Poison"],
+		baseStats: { hp: 60, atk: 125, def: 95, spa: 50, spd: 80, spe: 105 },
+		abilities: { 0: "Merciless", 1: "Poison Point", H: "Toxic Debris" },
+		heightm: 0.9,
+		weightkg: 14.5,
+		color: "Green",
+		eggGroups: ["Fairy", "Grass"],
 	},
 	cranidos: {
 		num: 408,
@@ -22531,4 +22544,15 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		evos: ["Turalyzer",],
     	eggGroups: ["Field", "Water 1"]
   	},
+	centisculk: {
+		num: -1042,
+		name: "Centisculk",
+    	types: ["Dark", "Bug"],
+    	baseStats: { hp: 100, atk: 115, def: 80, spa: 62, spd: 80, spe: 88 },
+    	abilities: { 0: "Earth Eater", 1: "Stake Out", H: "Opportunist" },
+    	heightm: 3,
+    	weightkg: 120,
+    	color: "Black",
+    	eggGroups: ["Bug"]
+	}
 };
