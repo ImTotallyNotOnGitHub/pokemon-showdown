@@ -7812,6 +7812,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7000,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		victreebellite: {
@@ -7825,6 +7826,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7001,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		starminite: {
@@ -7838,6 +7840,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7002,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		dragoninite: {
@@ -7851,6 +7854,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7003,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		meganiumite: {
@@ -7864,6 +7868,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7004,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		feraligite: {
@@ -7877,6 +7882,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7005,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		skarmorite: {
@@ -7890,6 +7896,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7005,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		froslassite: {
@@ -7903,6 +7910,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7006,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 			emboarnite: {
@@ -7916,6 +7924,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7007,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		excadrite: {
@@ -7929,6 +7938,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7008,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		scolipite: {
@@ -7942,6 +7952,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7009,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		scraftinite: {
@@ -7955,6 +7966,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7009,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		eelektrossite: {
@@ -7968,6 +7980,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7010,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		chandelurite: {
@@ -7981,6 +7994,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7011,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		chesnaughtite: {
@@ -7994,6 +8008,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7012,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		delphoxite: {
@@ -8007,6 +8022,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7013,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		greninjite: {
@@ -8020,6 +8036,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7014,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		pyroarite: {
@@ -8033,6 +8050,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7015,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		floettite: {
@@ -8046,6 +8064,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7016,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		malamarite: {
@@ -8059,6 +8078,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7017,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		barbaracite: {
@@ -8072,6 +8092,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7018,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		hawluchanite: {
@@ -8085,6 +8106,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7019,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		dragalgite: {
@@ -8098,6 +8120,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7020,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		zygardite: {
@@ -8111,6 +8134,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7021,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		drampanite: {
@@ -8124,6 +8148,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7022,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 		falinksite: {
@@ -8137,6 +8162,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			return true;
 		},
 		num: 7023,
+		gen: 9,
 		isNonstandard: "Custom"
 	},
 };
