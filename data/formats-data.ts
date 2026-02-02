@@ -6808,4 +6808,9 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "Illegal",
 		natDexTier: "T?"
 	},
+	stonjournercraftia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TRU",
+	},
 };
