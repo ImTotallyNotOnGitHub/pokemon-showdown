@@ -6808,6 +6808,11 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "Illegal",
 		natDexTier: "T?"
 	},
+	dhelmisecraftia: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "TUU"
+	},
 	stonjournercraftia: {
 		isNonstandard: "Custom",
 		tier: "Illegal",

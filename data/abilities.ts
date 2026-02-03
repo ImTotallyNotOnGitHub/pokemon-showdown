@@ -5963,4 +5963,24 @@ augment: {
 		rating: 1.5,
 		num: -9998,
 	},
+	earthshaper: {
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Earth Shaper boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Ground') {
+				this.debug('Earth Shaper boost');
+				return this.chainModify(1.5);
+			}
+		},
+		flags: {},
+		name: "Earth Shaper",
+		rating: 3.5,
+		num: -9997,
+	},
 };
