@@ -5983,4 +5983,16 @@ augment: {
 		rating: 3.5,
 		num: -9997,
 	},
+	impact: {
+		onBasePowerPriority: 23,
+		onBasePower(basePower, pokemon, target, move) {
+			if (pokemon.getStat('spe') >= target.getStat('spe') && move.category === 'Physical' && move.flags['contact']) {
+				return this.chainModify(Math.min(1.5, pokemon.getStat('spe') / target.getStat('spe')));
+			}
+		},
+		flags: {},
+		name: "Impact",
+		rating: 2,
+		num: -9998
+	},
 };
