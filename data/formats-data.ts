@@ -6818,4 +6818,9 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		tier: "Illegal",
 		natDexTier: "TRU"
 	},
+	arcinja: {
+		isNonstandard: "Custom",
+		tier: "Illegal",
+		natDexTier: "T?"
+	},
 };

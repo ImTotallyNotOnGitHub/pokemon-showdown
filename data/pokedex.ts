@@ -22611,5 +22611,17 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
     	weightkg: 120,
     	color: "Black",
     	eggGroups: ["Bug"]
-	}
+	},
+	arcinja: {
+		num: -1043,
+		name: "Arcinja",
+		types: ["Normal"],
+		gender: "N",
+		baseStats: { hp: 103, atk: 102, def: 84, spa: 113, spd: 103, spe: 120 },
+		abilities: { 0: "Multitype", H: "Protean" },
+		heightm: 1.5,
+		weightkg: 400,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+	},
 };
