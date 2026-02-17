@@ -101704,6 +101704,6 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 					upperhand: ["9M"],
 					uturn: ["9M"],
 					workup: ["9M"],
-		}
+		},
 	},
 };
