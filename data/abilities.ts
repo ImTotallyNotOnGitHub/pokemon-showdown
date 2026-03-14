@@ -1325,6 +1325,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	flowergift: {
 		onSwitchInPriority: -2,
 		onStart(pokemon) {
+			this.field.setWeather('sunnyday');
 			this.singleEvent('WeatherChange', this.effect, this.effectState, pokemon);
 		},
 		onWeatherChange(pokemon) {
@@ -1340,18 +1341,34 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				}
 			}
 		},
-		onAllyModifyAtkPriority: 3,
-		onAllyModifyAtk(atk, pokemon) {
-			if (this.effectState.target.baseSpecies.baseSpecies !== 'Cherrim') return;
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, pokemon) {
 			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.5);
+				return this.chainModify(1.2);
 			}
 		},
-		onAllyModifySpDPriority: 4,
-		onAllyModifySpD(spd, pokemon) {
-			if (this.effectState.target.baseSpecies.baseSpecies !== 'Cherrim') return;
+		onModifyDefPriority: 5,
+		onModifyDef(def, pokemon) {
 			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.5);
+				return this.chainModify(1.2);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(spa, pokemon) {
+			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.2);
+			}
+		},
+		onModifySpDPriority: 5,
+		onModifySpD(spd, pokemon) {
+			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.2);
+			}
+		},
+		onModifySpePriority: 5,
+		onModifySpe(spe, pokemon) {
+			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.2);
 			}
 		},
 		flags: { failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, breakable: 1 },
@@ -1437,6 +1454,17 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			}
 			if (pokemon.isActive && forme) {
 				pokemon.formeChange(forme, this.effect, false, '0', '[msg]');
+			}
+		},
+		onBeforeMove(source, target, move) {
+			if (move.type === 'Fire') {
+				this.field.setWeather('sunnyday');
+			}
+			if (move.type === 'Water') {
+				this.field.setWeather('raindance');
+			}
+			if (move.type === 'Ice') {
+				this.field.setWeather('snowscape');
 			}
 		},
 		flags: { failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1 },
@@ -5628,6 +5656,194 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: -3,
 	},
+// PCP Abilities
+	coffinscurse: {
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Immovable');
+			this.add('-message', `${pokemon.name}'s gains the resistances of the Steel typing!`);
+		},
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.type === 'Normal' || move.type === 'Flying' || move.type === 'Rock' || move.type === 'Bug' || move.type === 'Steel' || move.type === 'Psychic' || move.type === 'Dragon' || move.type === 'Fairy' || move.type === 'Grass' || move.type === 'Ice') {
+				return this.chainModify(0.5);
+			}
+		},
+		flags: { breakable: 1 },
+		name: "Iceberg Body",
+		rating: 3,
+		num: -1035
+	},
+	heavyartillery: {
+		onBasePowerPriority: 19,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['pulse']) {
+				return this.chainModify(1.5);
+			}
+		},
+		flags: {},
+		name: "Heavy Artillery",
+		rating: 3.5,
+		num: -1036
+	},
+	icebergbody: {
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Immovable');
+			this.add('-message', `${pokemon.name}'s gains the resistances of the Water typing!`);
+		},
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.type === 'Fire' || move.type === 'Steel' || move.type === 'Water' || move.type === 'Ice') {
+				return this.chainModify(0.5);
+			}
+		},
+		flags: { breakable: 1 },
+		name: "Iceberg Body",
+		rating: 3,
+		num: -1035
+	},
+	immovable: {
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Immovable');
+			this.add('-message', `${pokemon.name}'s sheds the weaknesses of its Rock typing!`);
+		},
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.type === 'Grass' || move.type === 'Ground' || move.type === 'Steel' || move.type === 'Water' || move.type === 'Fighting') {
+				return this.chainModify(0.5);
+			}
+		},
+		flags: { breakable: 1 },
+		name: "Immovable",
+		rating: 3,
+		num: -1037
+	},
+	monkeymadness: {
+		onStart(pokemon) {
+			pokemon.abilityState.choiceLock = "";
+		},
+		onBeforeMove(pokemon, target, move) {
+			if (move.isZOrMaxPowered || move.id === 'struggle') return;
+			if (pokemon.abilityState.choiceLock && pokemon.abilityState.choiceLock !== move.id) {
+				// Fails unless ability is being ignored (these events will not run), no PP lost.
+				this.addMove('move', pokemon, move.name);
+				this.attrLastMove('[still]');
+				this.debug("Disabled by Monkey Madness");
+				this.add('-fail', pokemon);
+				return false;
+			}
+		},
+		onModifyMove(move, pokemon) {
+			if (pokemon.abilityState.choiceLock || move.isZOrMaxPowered || move.id === 'struggle') return;
+			pokemon.abilityState.choiceLock = move.id;
+		},
+		onModifyAtkPriority: 1,
+		onModifyAtk(atk, pokemon) {
+			if (pokemon.volatiles['dynamax']) return;
+			// PLACEHOLDER
+			this.debug('Monkey Madness Atk Boost');
+			return this.chainModify(1.5);
+		},
+		onModifySpAPriority: 1,
+		onModifySpA(spa, pokemon) {
+			if (pokemon.volatiles['dynamax']) return;
+			// PLACEHOLDER
+			this.debug('Monkey Madness SpA Boost');
+			return this.chainModify(1.5);
+		},
+		onDisableMove(pokemon) {
+			if (!pokemon.abilityState.choiceLock) return;
+			if (pokemon.volatiles['dynamax']) return;
+			for (const moveSlot of pokemon.moveSlots) {
+				if (moveSlot.id !== pokemon.abilityState.choiceLock) {
+					pokemon.disableMove(moveSlot.id, false, this.effectState.sourceEffect);
+				}
+			}
+		},
+		onEnd(pokemon) {
+			pokemon.abilityState.choiceLock = "";
+		},
+		flags: {},
+		name: "Monkey Madness",
+		rating: 4,
+		num: -1038
+	},
+	pseudowood: {
+		onSourceModifyDamage(damage, source, target, move) {
+			if (this.effectState.target.pseudoWood= false) {
+				this.effectState.target.pseudoWood = true;
+				this.add('-activate', target, 'ability: Pseudo Wood');
+				return 0;
+			}
+		},
+		flags: { breakable: 1 },
+		name: "Pseudo Wood",
+		rating: 4,
+		num: -1034
+	},
+	sharpshooter: {
+		onModifyMove(move) {
+			if (move.flags['bullet']) {
+				move.priority = 1;
+			}
+		},
+		flags: {},
+		name: "Sharpshooter",
+		rating: 2,
+		num: -1039
+	},
+	swiftdraw: {
+		onModifyMove(move) {
+			if (move.flags['slicing']) {
+				move.priority = 1;
+			}
+		},
+		flags: {},
+		name: "Swift Draw",
+		rating: 2,
+		num: -1040
+	},
+	touchtrap: {
+		onDamagingHit(damage, target, source, move) {
+			if (move.flags['contact']) {
+				source.addVolatile('partiallytrapped', target);
+			}
+		},
+		flags: { breakable: 1 },
+		name: "Touch Trap",
+		rating: 2,
+		num: -1033
+	},
+	unstopabble: {
+		onTryBoost(boost, target, source, effect) {
+			if (source && target === source) return;
+			if (boost.atk && boost.atk < 0) {
+				let showMsg = false;
+				let i: BoostID;
+				for (i in boost) {
+					if (boost[i]! < 0) {
+						delete boost[i];
+						showMsg = true;
+					}
+				}
+				if (showMsg && !(effect as ActiveMove).secondaries && effect.id !== 'octolock') {
+					this.add("-fail", target, "unboost", "[from] ability: Unstoppable", `[of] ${target}`);
+				}
+			}
+		},
+		onUpdate(pokemon) {
+			if (pokemon.status) {
+				this.add('-activate', pokemon, 'ability: Thermal Exchange');
+				pokemon.cureStatus();
+			}
+		},
+		onSetStatus(status, target, source, effect) {
+			if ((effect as Move)?.status) {
+				this.add('-immune', target, '[from] ability: Unstoppable');
+			}
+			return false;
+		},
+		flags: { breakable: 1 },
+		name: "Unstoppable",
+		rating: 4,
+		num: -1041
+	},
 // PokeClash Abilities
 	arcanethorns: {
 		onDamagingHitOrder: 1,
@@ -5873,27 +6089,27 @@ augment: {
 		num: -1007
 	},
 	heartofthesea: {
-	onStart(pokemon) {
-		this.add('-ability', pokemon, 'Heart of the Sea');
-		this.add('-message', `${pokemon.name}'s defenses now act as if it's a pure Water type!`);
-	},
-	onEffectiveness(typeMod, target, type, move) {
-		if (!target || !move) return;
-		if (move.category === 'Status') return; // Status moves don't deal damage
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Heart of the Sea');
+			this.add('-message', `${pokemon.name}'s defenses now act as if it's a pure Water type!`);
+		},
+		onEffectiveness(typeMod, target, type, move) {
+			if (!target || !move) return;
+			if (move.category === 'Status') return; // Status moves don't deal damage
 
-		// Simulate being pure Water type on defense
-		const waterEffectiveness = this.dex.getEffectiveness(move, 'Water');
-		const actualEffectiveness = this.dex.getEffectiveness(move, type);
+			// Simulate being pure Water type on defense
+			const waterEffectiveness = this.dex.getEffectiveness(move, 'Water');
+			const actualEffectiveness = this.dex.getEffectiveness(move, type);
 
-		// Adjust typeMod to reflect Water-type instead of actual type
-		// Replace effectiveness only on first type (since we're treating it as monotype)
-		if (type === target.types[0]) {
-		return waterEffectiveness - actualEffectiveness;
-		}
-	},
-	name: "Heart of the Sea",
-	rating: 3.5,
-	num: -9999,
+			// Adjust typeMod to reflect Water-type instead of actual type
+			// Replace effectiveness only on first type (since we're treating it as monotype)
+			if (type === target.types[0]) {
+			return waterEffectiveness - actualEffectiveness;
+			}
+		},
+		name: "Heart of the Sea",
+		rating: 3.5,
+		num: -9999,
 	},
 	royalhusk: {
 		// Prevents defense drop from foes' moves/abilities

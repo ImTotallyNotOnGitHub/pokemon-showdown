@@ -240,7 +240,9 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				this.add('-end', pokemon, this.effectState.sourceEffect, '[partiallytrapped]', '[silent]');
 				return;
 			}
-			this.damage(pokemon.baseMaxhp / this.effectState.boundDivisor);
+			if (this.effectState.sourceEffect !== 'touchtrap') {
+				this.damage(pokemon.baseMaxhp / this.effectState.boundDivisor);
+			}
 		},
 		onEnd(pokemon) {
 			this.add('-end', pokemon, this.effectState.sourceEffect, '[partiallytrapped]');

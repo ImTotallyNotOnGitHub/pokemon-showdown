@@ -258,6 +258,7 @@ export class Pokemon {
 	shieldBoost: boolean;
 	syrupTriggered: boolean;
 	stellarBoostedTypes: string[];
+	pseudoWood: boolean;
 
 	/** Have this pokemon's Start events run yet? (Start events run every switch-in) */
 	isStarted: boolean;
@@ -471,6 +472,7 @@ export class Pokemon {
 		this.heroMessageDisplayed = false;
 		this.swordBoost = false;
 		this.shieldBoost = false;
+		this.pseudoWood = false;
 		this.syrupTriggered = false;
 		this.stellarBoostedTypes = [];
 		this.isStarted = false;
