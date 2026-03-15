@@ -5670,7 +5670,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: { breakable: 1 },
 		name: "Iceberg Body",
 		rating: 3,
-		num: -1035
+		num: -2001
 	},
 	heavyartillery: {
 		onBasePowerPriority: 19,
@@ -5682,7 +5682,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: {},
 		name: "Heavy Artillery",
 		rating: 3.5,
-		num: -1036
+		num: -2002
 	},
 	icebergbody: {
 		onStart(pokemon) {
@@ -5697,7 +5697,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: { breakable: 1 },
 		name: "Iceberg Body",
 		rating: 3,
-		num: -1035
+		num: -2003
 	},
 	immovable: {
 		onStart(pokemon) {
@@ -5712,7 +5712,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: { breakable: 1 },
 		name: "Immovable",
 		rating: 3,
-		num: -1037
+		num: -2004
 	},
 	monkeymadness: {
 		onStart(pokemon) {
@@ -5762,12 +5762,12 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: {},
 		name: "Monkey Madness",
 		rating: 4,
-		num: -1038
+		num: -2005
 	},
 	pseudowood: {
 		onSourceModifyDamage(damage, source, target, move) {
-			if (this.effectState.target.pseudoWood= false) {
-				this.effectState.target.pseudoWood = true;
+			if (target.pseudoWood = false) {
+				target.pseudoWood = true;
 				this.add('-activate', target, 'ability: Pseudo Wood');
 				return 0;
 			}
@@ -5775,7 +5775,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: { breakable: 1 },
 		name: "Pseudo Wood",
 		rating: 4,
-		num: -1034
+		num: -2006
 	},
 	sharpshooter: {
 		onModifyMove(move) {
@@ -5786,7 +5786,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: {},
 		name: "Sharpshooter",
 		rating: 2,
-		num: -1039
+		num: -2007
 	},
 	swiftdraw: {
 		onModifyMove(move) {
@@ -5797,7 +5797,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: {},
 		name: "Swift Draw",
 		rating: 2,
-		num: -1040
+		num: -2008
 	},
 	touchtrap: {
 		onDamagingHit(damage, target, source, move) {
@@ -5808,7 +5808,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: { breakable: 1 },
 		name: "Touch Trap",
 		rating: 2,
-		num: -1033
+		num: -2009
 	},
 	unstopabble: {
 		onTryBoost(boost, target, source, effect) {
@@ -5842,7 +5842,37 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: { breakable: 1 },
 		name: "Unstoppable",
 		rating: 4,
-		num: -1041
+		num: -2010
+	},
+	preydrive: {
+		onStart(pokemon) {
+			for (const target of pokemon.adjacentFoes()) {
+				const holderType1 = pokemon.getTypes()[0];
+				const holderType2 = pokemon.getTypes()[1];
+				if (this.dex.getEffectiveness(holderType1, target) > 0 || this.dex.getEffectiveness(holderType2, target) > 0) {
+					const stat = pokemon.getBestStat(true, false);
+					this.boost({ [stat]: 1 }, pokemon, pokemon);
+				}
+			}
+		},
+		flags: {},
+		name: "Prey Drive",
+		rating: 2,
+		num: -2011
+	},
+	moltencore: {
+		onResidualOrder: 29,
+		onResidual(pokemon) {
+			for (const target of pokemon.adjacentFoes()) {
+				if (!target.getTypes().includes('Fire')) {
+					this.damage(target.baseMaxhp / 8, target, pokemon);
+				}
+			}
+		},
+		flags: {},
+		name: "Molten Core",
+		rating: 3,
+		num: -2012
 	},
 // PokeClash Abilities
 	arcanethorns: {
