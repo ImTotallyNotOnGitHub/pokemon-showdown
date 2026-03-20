@@ -4240,6 +4240,16 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
 		secondary: null,
+		onModifyMove(move, pokemon) {
+			if (pokemon.species.name === 'Garchomp-Mega') {
+				move.basePower = 110;
+				move.flags['slicing'] = 1;
+				move.secondary = {
+					chance: 30,
+					status: 'bleed',
+				};
+			}
+		},
 		target: "normal",
 		type: "Dragon",
 		contestType: "Cool",
@@ -17879,6 +17889,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name);
+			if (attacker.species.name === 'Meganium-Mega') {
+				this.boost({ spa: 1 }, attacker, attacker, move);
+			}
 			if (['sunnyday', 'desolateland'].includes(attacker.effectiveWeather())) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
@@ -17889,6 +17902,11 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			}
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
+		},
+		onModifyMove(move, pokemon) {
+			if (pokemon.species.name === 'Meganium-Mega') {
+				move.basePower = 130;
+			}
 		},
 		onBasePower(basePower, pokemon, target) {
 			const weakWeathers = ['raindance', 'primordialsea', 'sandstorm', 'hail', 'snowscape'];
@@ -22764,6 +22782,50 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		target: "self",
 		type: "Electric",
+		contestType: "Clever",
+	},
+	armorpiercer: {
+		num: 1008,
+		accuracy: 100,
+		basePower: 60,
+		onBasePower(basePower, pokemon, target, move) {
+			const bp = move.basePower + 20 * (target.boosts.def);
+			this.debug(`BP: ${bp}`);
+			return bp;
+		},
+		category: "Physical",
+		name: "Guard Break",
+		pp: 10,
+		priority: 0,
+		flags: { contact: 1, protect: 1, mirror: 1 },
+		secondary: null,
+		onAfterMoveSecondary(target, source, move) {
+			target.boosts.def = 0;
+		},
+		target: "normal",
+		type: "Fighting",
+		contestType: "Tough",
+	},
+	mindshatter: {
+		num: 1009,
+		accuracy: 100,
+		basePower: 60,
+		onBasePower(basePower, pokemon, target, move) {
+			const bp = move.basePower + 20 * (target.boosts.spd);
+			this.debug(`BP: ${bp}`);
+			return bp;
+		},
+		category: "Special",
+		name: "Mind Shatter",
+		pp: 10,
+		priority: 0,
+		flags: { protect: 1, mirror: 1 },
+		secondary: null,
+		onAfterMoveSecondary(target, source, move) {
+			target.boosts.spd = 0;
+		},
+		target: "normal",
+		type: "Psychic",
 		contestType: "Clever",
 	}
 };

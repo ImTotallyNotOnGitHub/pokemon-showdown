@@ -5659,16 +5659,17 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 // PCP Abilities
 	coffinscurse: {
 		onStart(pokemon) {
-			this.add('-ability', pokemon, 'Immovable');
+			this.add('-ability', pokemon, 'Coffin\'s Curse');
 			this.add('-message', `${pokemon.name}'s gains the resistances of the Steel typing!`);
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Normal' || move.type === 'Flying' || move.type === 'Rock' || move.type === 'Bug' || move.type === 'Steel' || move.type === 'Psychic' || move.type === 'Dragon' || move.type === 'Fairy' || move.type === 'Grass' || move.type === 'Ice') {
+			const moveType = move.id === 'hiddenpower' ? target.hpType : move.type;
+			if (this.dex.getEffectiveness(moveType, 'cufant') < 0) {
 				return this.chainModify(0.5);
 			}
 		},
 		flags: { breakable: 1 },
-		name: "Iceberg Body",
+		name: "Coffin\'s Curse",
 		rating: 3,
 		num: -2001
 	},
@@ -5686,11 +5687,12 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	icebergbody: {
 		onStart(pokemon) {
-			this.add('-ability', pokemon, 'Immovable');
+			this.add('-ability', pokemon, 'Iceberg Body');
 			this.add('-message', `${pokemon.name}'s gains the resistances of the Water typing!`);
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Fire' || move.type === 'Steel' || move.type === 'Water' || move.type === 'Ice') {
+			const moveType = move.id === 'hiddenpower' ? target.hpType : move.type;
+			if (this.dex.getEffectiveness(moveType, 'squirtle') < 0) {
 				return this.chainModify(0.5);
 			}
 		},
@@ -5705,7 +5707,8 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			this.add('-message', `${pokemon.name}'s sheds the weaknesses of its Rock typing!`);
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Grass' || move.type === 'Ground' || move.type === 'Steel' || move.type === 'Water' || move.type === 'Fighting') {
+			const moveType = move.id === 'hiddenpower' ? target.hpType : move.type;
+			if (this.dex.getEffectiveness(moveType, 'roggenrola') > 0) {
 				return this.chainModify(0.5);
 			}
 		},
@@ -5873,6 +5876,30 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		name: "Molten Core",
 		rating: 3,
 		num: -2012
+	},
+	bloodscent: {
+		onBasePowerPriority: 19,
+		onBasePower(basePower, attacker, defender, move) {
+			if (defender.hp < defender.maxhp) {
+				return this.chainModify(1 + (1 - defender.hp / defender.maxhp));
+			}
+		},
+		flags: {},
+		name: "Bloodscent",
+		rating: 3,
+		num: -2013
+	},
+	scavenger: {
+		onSourceAfterFaint(length, target, source, effect) {
+			if (effect && effect.effectType === 'Move') {
+				const bestStat = target.getBestStat(false, false);
+				this.boost({ [bestStat]: 1 }, source);
+			}
+		},
+		flags: {},
+		name: "Scavenger",
+		rating: 2,
+		num: -2014
 	},
 // PokeClash Abilities
 	arcanethorns: {

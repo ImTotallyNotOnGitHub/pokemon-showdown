@@ -93,6 +93,14 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				target.formeChange('Shaymin', this.effect, true);
 			}
 		},
+		onResidualOrder: 10,
+		onResidual(pokemon) {
+			this.damage(pokemon.baseMaxhp / 16);
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(spa, pokemon) {
+			this.chainModify(0.5);
+		},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (move.flags['defrost'] && !(move.id === 'burnup' && !pokemon.hasType('Fire'))) return;
@@ -100,8 +108,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 				pokemon.cureStatus();
 				return;
 			}
-			this.add('cant', pokemon, 'frz');
-			return false;
 		},
 		onModifyMove(move, pokemon) {
 			if (move.flags['defrost']) {
@@ -908,5 +914,20 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			source.removeVolatile('rolloutstorage');
 			return bp;
 		},
+	},
+// Custom Conditions
+	bleed: {
+		name: 'bleed',
+		effectType: 'Status',
+		onResidualOrder: 9,
+		onResidual(pokemon) {
+			this.damage(pokemon.baseMaxhp / 16);
+		},
+		onTryHealPriority: 1,
+		onTryHeal(damage, target, source, effect) {
+				return this.chainModify([2, 3]);
+			}
+		},
+		
 	},
 };
