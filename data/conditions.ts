@@ -926,8 +926,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onTryHealPriority: 1,
 		onTryHeal(damage, target, source, effect) {
 				return this.chainModify([2, 3]);
-			}
-		},
-		
+		}
 	},
 };
